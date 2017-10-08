@@ -73,7 +73,7 @@ angular
     /*
         Before starting the application we're saving the user if present in the rootScope
     */
-    .controller('mainController', function ($scope,$uibModal,$rootScope,userService) {
+    .controller('mainController', function ($scope,$rootScope,userService) {
         $rootScope.$on('event:social-sign-in-success', function (event, userDetails) {
 
             var element = angular.element('#closeLogin');
