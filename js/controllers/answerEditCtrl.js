@@ -11,13 +11,8 @@ angular
 					text: ''
 				};
 
-				userService.getUserModel()
-					.then(function (response) {
-						answModel.user = response;
-						answModel.newAnswer.author = response._id
-					})
 			}
-
+            answModel.user = userService.getUserModel();
 			answModel.successInCreation = false;
 			answModel.errorInCreation = false;
 

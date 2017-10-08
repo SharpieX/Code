@@ -55,9 +55,9 @@ angular
 				sort: '-count'
 			}).then(function (response) {
 				/* tagsModel.tags are the visible tags*/
-				tagsModel.tags = response;
+				tagsModel.tags = response.data.data;
 				/* All tags, pagination in real world app */
-				tagsModel.allTags = response;
+				tagsModel.allTags = response.data.data;
 			})
 
 			/* Handles search */

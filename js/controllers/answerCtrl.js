@@ -19,17 +19,14 @@ angular
 				questionsService.updateViews(question);
 			}
 
-			userService.getUserModel().then(function (response) {
-				answerModel.user = response;
-			});
-
+            answerModel.user =  userService.getUserModel();
 			answerModel.question = question;
 			answerModel.question.showCommentArea = false;
 
-			answerModel.qTotalVote = question.actions.votes.users_upvote.length - question.actions.votes.users_downvote.length;
+			/*answerModel.qTotalVote = question.actions.votes.users_upvote.length - question.actions.votes.users_downvote.length;
 			for (var i = 0, j = answerModel.question.answers.length; i < j; i++) {
 				answerModel.question.answers[i].showCommentArea = false;
-			}
+			}*/
 
 			/* Redirects to login */
 			answerModel.toLogin = function () {

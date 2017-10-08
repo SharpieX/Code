@@ -3,53 +3,27 @@
 
 angular
 	.module('stack.service')
-	.factory('tagsService', ['$q', '$stamplay', function ($q, $stamplay) {
+	.factory('tagsService', ['$http', function ($http) {
 
 		return {
 
 			getTags: function (options) {
-				var def = $q.defer();
-				options = options || {};
-				
-				$stamplay.Object('tag').get(options)
-					.then(function (res) {
-						def.resolve(res.data);
-					})
-					.catch(function (err) {
-						def.reject(err);
-					});
-
-				return def.promise;
+                return $http({
+                    method: 'GET',
+                    url: '/api/getTags'
+                });
 			},
 
 			getById: function (tagId) {
-				var def = $q.defer();
 
-				$stamplay.Object('tag').get({ _id : tagId })
-					.then(function (res) {
-						def.resolve(res.data[0]);
-					})
-					.catch(function (err) {
-						def.reject(err);
-					});
-				
-
-				return def.promise;
 			},
 
 			searchTag: function (params) {
-
-				var def = $q.defer();
-
-				$stamplay.Object("tag").get(params)
-					.then(function (res) {
-						def.resolve(res.data);
-					})
-					.catch(function (err) {
-						def.reject(err);
-					});
-
-				return def.promise;
+                return $http({
+                    method: 'POST',
+                    url: '/api/searchTags',
+					data:params
+                });
 			}
 
 		};

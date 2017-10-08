@@ -57,10 +57,10 @@
                 <span ng-repeat="tag in q.tags"><a class="post-tag">{{tag.name}}</a></span>
               </div>
               <div class="col-md-6 pull-right" ng-hide="sort.active">
-                asked {{q.dt_create | date:"mediumDate"}} by  {{q.author.displayName || q.author.identities.github._json.login || 'name not shared'}} 
+                asked {{q.dt_create | date:"mediumDate"}} by  {{q.author.name || 'name not shared'}}
               </div>
               <div class="col-md-6 pull-right" ng-show="sort.active">
-                updated {{q.dt_update | date:"mediumDate"}} by {{q.author.displayName || q.author.identities.github._json.login || 'name not shared'}} 
+                updated {{q.dt_update | date:"mediumDate"}} by {{q.author.name || 'name not shared'}}
               </div>          
             </div>
           </div>

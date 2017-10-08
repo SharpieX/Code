@@ -2,99 +2,81 @@
 'use strict';
 
 angular
-.module('stack.service')
-.factory('userService', ['$q', '$http', '$stamplay', "$rootScope", function ($q, $http, $stamplay, $rootScope) {
+    .module('stack.service')
+    .factory('userService', ['$q', '$http', '$stamplay', "$rootScope", function ($q, $http, $stamplay, $rootScope) {
 
-	var logged = false;
+        var logged = false;
+        var user;
 
-	$rootScope.login = function() {
-		$stamplay.User.socialLogin('github');
-	}
-
-	$rootScope.logout = function() {
-		$stamplay.User.logout();
-	}
-
-	return {
-		isLogged: function () {
-			return logged;
-		},
-
-
-
-		getUserModel: function () {
-			var def = $q.defer();
-
-			$stamplay.User.currentUser()
-			.then(function(res) {
-
-				if (res.user.hasOwnProperty('_id')) {		
-					res.user.points = res.user.points || 0;
-					logged = true;
-					def.resolve(res.user);
-				} else {
-					logged = false;
-					def.resolve(false)
-				}
-
-			})
-			.catch(function (err) {
-				def.reject(err);
-			});
+        return {
+            isLogged: function () {
+                return logged;
+            },
+            setUserModal: function (val) {
+                var def = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: '/api/saveUser',
+                    data: val,
+                }).then(function (response) {
+                    if (!response.err) {
+                        logged = true;
+                        user = response.data.data;
+                        def.resolve(response);
+                    }
+                }).catch(function (err) {
+                    def.reject(err);
+                });
+                return def.promise;
 
 
-			return def.promise;
-		}
-	};
-}])
+            },
+            getUserModel: function () {
+                return user;
+            }
+        };
+    }])
 
-.factory('usersService', ['$q', '$stamplay', function ($q, $stamplay) {
+    .factory('usersService', ['$q', '$stamplay', '$http' ,function ($q, $stamplay, $http) {
 
-	return {
+        return {
 
-		getUsers: function () {
-			var def = $q.defer();
+            getUsers: function () {
+                return $http({
+                    method: 'GET',
+                    url: '/api/getUsers'
+                })
+            },
 
-			$stamplay.User.get({})
-			.then(function (res) {
-				def.resolve(res.data);
-			})
-			.catch(function (err) {
-				def.reject(err);
-			});
+            getById: function (userId) {
+                var def = $q.defer();
 
-			return def.promise;
-		},
+                $stamplay.User.get({_id: userId})
+                    .then(function (res) {
+                        def.resolve(res.data[0]);
+                    })
+                    .catch(function (err) {
+                        def.reject(err);
+                    });
 
-		getById: function (userId) {
-			var def = $q.defer();
 
-			$stamplay.User.get({ _id : userId })
-			.then(function (res) {
-				def.resolve(res.data[0]);
-			})
-			.catch(function (err) {
-				def.reject(err);
-			});
-			
+                return def.promise;
+            },
 
-			return def.promise;
-		},
+            searchUser: function (params) {
 
-		searchUser: function (params) {
+                var def = $q.defer();
 
-			var def = $q.defer();
+                $stamplay.User.get(params)
+                    .then(function (res) {
+                        def.resolve(res.data);
+                    })
+                    .catch(function (err) {
+                        def.reject(err);
+                    });
 
-			$stamplay.User.get(params)
-			.then(function (res) {
-				def.resolve(res.data);
-			})
-			.catch(function (err) {
-				def.reject(err);
-			});
+                return def.promise;
+            }
 
-			return def.promise;
-		}
-
-	};
-}])
+        };
+    }])

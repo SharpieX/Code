@@ -12,12 +12,14 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies" : {
-    "express"    : "~4.7.2",
-    "mongoose"   : "~3.6.2",
-    "morgan"     : "~1.2.2",
+  "dependencies": {
+    "angularjs-social-login": "^2.6.1",
     "body-parser": "~1.5.2",
-    "method-override": "~2.1.2"
+    "express": "~4.7.2",
+    "http-proxy-middleware": "^0.17.4",
+    "method-override": "~2.1.2",
+    "mongoose": "~3.6.2",
+    "morgan": "~1.2.2"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

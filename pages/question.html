@@ -40,10 +40,10 @@
 						<div class="owner post-signature pull-right">
 							<div>asked {{answer.question.dt_create | date:"mediumDate"}}</div>
 							<div class="user-gravatar">
-								<img style="width:50px;" ng-src="{{answer.question.owner.profileImg}}"></img>
+								<img style="width:50px;" ng-src="{{answer.question.author.imageUrl}}"></img>
 							</div>
 							<div class="user-details">
-								{{answer.question.owner.displayName}}
+								{{answer.question.author.name}}
 							</div>
 						</div>
 					</div>
@@ -124,10 +124,10 @@
 						<div class="answer-author owner post-signature pull-right">
 							<div>asked {{aswr.dt_create | date:"mediumDate"}}</div>
 							<div class="user-gravatar">
-								<img style="width:50px;"  ng-src="{{aswr.owner.profileImg}}"></img>
+								<img style="width:50px;"  ng-src="{{aswr.author.imageUrl}}"></img>
 							</div>
 							<div class="user-details">
-								{{aswr.owner.displayName}}
+								{{aswr.author.name}}
 							</div>
 						</div>
 					</div>

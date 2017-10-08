@@ -3,7 +3,7 @@
 
 angular
 	.module('stack.service')
-	.factory('answersService', ['$q', 'usersService', '$stamplay', function ($q, usersService, $stamplay) {
+	.factory('answersService', ['$q', 'usersService', '$stamplay', '$http', function ($q, usersService, $stamplay, $http) {
 
 		function _getTotalVotes(model) {
 			return model.actions.votes.users_upvote.length - model.actions.votes.users_downvote.length
@@ -11,24 +11,13 @@ angular
 
 		return {
 
-			createAnswer: function (params) {
-				var def = $q.defer();
-				var answerModel = {}
-
-				angular.forEach(params, function (value, key) {
-					answerModel[key] = value;
-				});
-
-				$stamplay.Object("answer").save(answerModel)
-					.then(function (res) {
-						def.resolve(res);
-					})
-					.catch(function (err) {
-						def.reject(err);
-					});
-
-				return def.promise;
-			},
+            createAnswer: function (params) {
+                return $http({
+                    method: 'POST',
+                    url: '/api/saveAnswer',
+                    data: params
+                })
+            },
 
 			updateModel: function (answer, attrs) {
 				var checkedAnswer = {};
@@ -36,8 +25,12 @@ angular
 					checkedAnswer[key] = answer[key];
 				});
 				
-
-				return $stamplay.Object("answer").patch(answer._id, checkedAnswer);
+                checkedAnswer._id = answer._id;
+                return $http({
+                    method: 'POST',
+                    url: '/api/updateAnswer',
+                    data: checkedAnswer,
+                })
 
 			},
 
@@ -93,22 +86,11 @@ angular
 			},
 
 			getById: function (answerId) {
-				var def = $q.defer();
-				var answerModel = $stamplay.Cobject('answer').Model;
-
-				answerModel.fetch(answerId)
-					.then(function () {
-						return usersService.getById(answerModel.get('author'));
-					})
-					.then(function (authorModel) {
-						answerModel.set('author', authorModel);
-						def.resolve(answerModel);
-					})
-					.catch(function (err) {
-						def.reject(err);
-					});
-
-				return def.promise;
+                $http({
+                    method: 'GET',
+                    url: '/api/getAnswer/id',
+                    params: {id: answerId}
+                })
 			}
 		};
 	}]);

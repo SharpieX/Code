@@ -7,7 +7,7 @@ angular
 			var usersModel = this;
 			usersModel.sortOnNewUsers = true;
 			usersModel.searchUser = '';
-			usersModel.userList = users;
+			usersModel.userList = users.data;
 
 			usersModel.search = function () {
 				var reg = '".*' + usersModel.searchUser + '.*"';

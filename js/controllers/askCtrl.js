@@ -20,10 +20,7 @@ angular
 			askModel.cobj.answers = [];
 			askModel.cobj.views = 0;
 			askModel.questionSubmitted = false;
-
-			userService.getUserModel().then(function (response) {
-				askModel.cobj.author = response._id;
-			});
+            askModel.cobj.author = userService.getUserModel()._id
 
 			askModel.tags = [];
 			var tagName2Id = {};
@@ -31,15 +28,13 @@ angular
 			/* Used from typeahead to retrieve tags that matches the user search */
 			askModel.getTags = function (val) {
 				askModel.tags.length = 0;
-
-				var reg = '".*' + val + '.*"';
 				var query = {
-					'where': '{"name": {"$regex" : ' + reg + '}}'
+					where: {name: {"$regex" : val}}
 				};
 
 				return tagsService.searchTag(query)
 					.then(function (res) {
-						askModel.tags = res.map(function(tag) {
+						askModel.tags = res.data.data.map(function(tag) {
 							if(askModel.cobj.tags.indexOf(tag._id) < 0) {
 								return {
 									name : tag.name,
@@ -72,8 +67,8 @@ angular
 						askModel.cobj.tags = [];
 						askModel.cobj.answers = [];
 						askModel.cobj.views = 0;
-						askModel.cobj.author = $rootScope.user.id;
-						askModel.cobj.owner = $rootScope.user.id;
+						askModel.cobj.author = userService.getUserModel()._id
+						askModel.cobj.owner = userService.getUserModel()._id
 						askModel.cobj.text = '';
 						askModel.current = '';
 						askModel.questionSubmitted = true;

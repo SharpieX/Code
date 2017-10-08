@@ -23,10 +23,10 @@ angular
 			homeModel.loadQuestions = function (params) {
 				questionsService.getQuestions(params)
 					.then(function (result) {
-						homeModel.questions = result.questions;
-						homeModel.total = result.pagination;
-						homeModel.page++;
-						homeModel.busy = false;
+						homeModel.questions = result.data.data;
+						//homeModel.total = result.pagination;
+						//homeModel.page++;
+						//homeModel.busy = false;
 					});
 			};
 
