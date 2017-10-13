@@ -15,18 +15,31 @@ angular
             setUserModal: function (val) {
                 var def = $q.defer();
                 $http({
-                    method: 'POST',
-                    url: '/api/saveUser',
-                    data: val,
+                    method: 'GET',
+                    url: '/api/authUser/id',
+                    params: {id: val.uuid}
                 }).then(function (response) {
-                    if (!response.err) {
+                    if (!response.data.err) {
                         logged = true;
                         user = response.data.data;
                         def.resolve(response);
+                    } else if (response.data.err === 2) {
+                        $http({
+                            method: 'POST',
+                            url: '/api/saveUser',
+                            data: val,
+                        }).then(function (response) {
+                            if (!response.err) {
+                                logged = true;
+                                user = response.data.data;
+                                def.resolve(response);
+                            }
+                        })
                     }
                 }).catch(function (err) {
-                    def.reject(err);
-                });
+                        def.reject(err);
+                    });
+
                 return def.promise;
 
 

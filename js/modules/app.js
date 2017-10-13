@@ -84,6 +84,7 @@ angular
                 profileImg: userDetails.imageUrl,
                 provider: userDetails.provider,
                 uuid: userDetails.uid,
+                email:userDetails.email,
             };
             $scope.user = user;
             userService.setUserModal(user)
@@ -93,22 +94,4 @@ angular
                 })
         });
 
-        $scope.showLogin = function (size, parentSelector) {
-            var parentElem = parentSelector ?
-                angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
-            var modalInstance = $uibModal.open({
-                animation: false,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'login.html',
-                size: size,
-                appendTo: parentElem,
-            });
-            modalInstance.result.then(function (selectedItem) {
-                //$ctrl.selected = selectedItem;
-                console.log("User")
-            }, function () {
-                console.log("Dismissed");
-            });
-        }
     });
