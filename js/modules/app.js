@@ -1,7 +1,7 @@
 /*global angular*/
 'use strict';
 
-angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.router', 'ui.bootstrap', 'textAngular', 'ngStamplay', 'socialLogin']);
+angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.router', 'ui.bootstrap', 'textAngular', 'ngStamplay', 'socialLogin','ngFileUpload']);
 
 angular
     .module('stack')
@@ -9,20 +9,38 @@ angular
         socialProvider.setFbKey({appId: '1459189657469557', apiVersion: "v2.4"});
 
         /* Textangular options, same options as StackOverflow */
-        $provide.decorator('taOptions', ['$delegate',
-            function (taOptions) {
-                taOptions.toolbar =
-                    [
-                        ['bold', 'italics'],
-                        ['insertLink', 'quote', 'pre', 'insertImage'],
-                        ['ol', 'ul'],
-                        ['h1', 'h2'],
-                        ['undo', 'redo'],
-                        ['html']
-                    ];
-                return taOptions;
-            }
-        ]);
+        $provide.decorator('taOptions', ['taRegisterTool', '$delegate', '$uibModal', function (taRegisterTool, taOptions, $uibModal) {
+            taRegisterTool('uploadImage', {
+                iconclass: "fa fa-paperclip",
+                action: function (deferred,restoreSelection) {
+                    $uibModal.open({
+                        controller: 'UploadImageModalInstance',
+                        templateUrl: 'views/upload.html'
+                    }).result.then(
+                        function (result) {
+                            restoreSelection();
+                            document.execCommand('insertImage', true, result);
+                            deferred.resolve();
+                        },
+                        function () {
+                            deferred.resolve();
+                        }
+                    );
+                    return false;
+                }
+            });
+            taOptions.toolbar =
+                [
+                    ['bold', 'italics'],
+                    ['insertLink', 'quote', 'pre', 'insertImage'],
+                    ['ol', 'ul'],
+                    ['h1', 'h2'],
+                    ['undo', 'redo'],
+                    ['html']
+                ];
+            taOptions.toolbar[1].push('uploadImage');
+            return taOptions;
+        }]);
 
         $urlRouterProvider.otherwise('/');
 
@@ -94,4 +112,30 @@ angular
                 })
         });
 
-    });
+    })
+    .controller('UploadImageModalInstance', function ($scope, $uibModalInstance, Upload) {
+        $scope.progress = 0;
+        $scope.files = [];
+        $scope.upload = function (file) {
+            if (file) {
+                Upload.upload({
+                    url: 'api/upload',
+                    data: {file: file}
+                }).then(function (resp) {
+                     $scope.progress = 0;
+                     $scope.image = window.location.origin + "/api/resources/uuid?uuid=" + resp.data.uuid;
+                    console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+                }, function (resp) {
+                    console.log('Error status: ' + resp.status);
+                }, function (evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    $scope.progress = progressPercentage;
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                });
+            }
+        }
+
+        $scope.insert = function () {
+            $uibModalInstance.close($scope.image);
+        };
+    })

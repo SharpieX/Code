@@ -24,14 +24,10 @@ angular
 						nAnswer.dt_create = moment(nAnswer.dt_create).format('ll');
 
 						questionsService.submitAnswer(questionModel, nAnswer)
-							.then(function () {
-								answModel.successInCreation = true;
-
-								$scope.$apply(function () {
-									answModel.successInCreation = false;
-									answModel.newAnswer.text = '';
-								})
-							})
+                            .then(function () {
+                                answModel.successInCreation = true;
+                                answModel.newAnswer.text = '';
+                            })
 							.catch(function (err) {
 								console.log(err)
 								answModel.errorInCreation = true;

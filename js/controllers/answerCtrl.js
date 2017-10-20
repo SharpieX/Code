@@ -1,4 +1,5 @@
-5/*global angular*/
+5
+/*global angular*/
 'use strict';
 /*
  * This controller is responsible to enable/disable UI controls
@@ -9,173 +10,176 @@
  * The main functions defined here are: `setChecked`, `comment`, `voteUp` and `voteDown`
  */
 angular
-	.module('stack')
-	.controller('answerCtrl', ['$scope', 'question', 'userService', 'questionsService', 'answersService',
-		function ($scope, question, userService, questionsService, answersService) {
+    .module('stack')
+    .controller('answerCtrl', ['$scope', 'question', 'userService', 'questionsService', 'answersService',
+        function ($scope, question, userService, questionsService, answersService) {
 
-			var answerModel = this;
-			if (userService.isLogged()) {
-				/* Only logged users can update instances */
-				questionsService.updateViews(question);
-			}
+            var answerModel = this;
+            if (userService.isLogged()) {
+                /* Only logged users can update instances */
+                questionsService.updateViews(question);
+            }
 
-            answerModel.user =  userService.getUserModel();
-			answerModel.question = question;
-			answerModel.question.showCommentArea = false;
+            answerModel.user = userService.getUserModel();
+            answerModel.question = question;
+            answerModel.question.showCommentArea = false;
 
-			/*answerModel.qTotalVote = question.actions.votes.users_upvote.length - question.actions.votes.users_downvote.length;
-			for (var i = 0, j = answerModel.question.answers.length; i < j; i++) {
-				answerModel.question.answers[i].showCommentArea = false;
-			}*/
+            /*answerModel.qTotalVote = question.actions.votes.users_upvote.length - question.actions.votes.users_downvote.length;
+            for (var i = 0, j = answerModel.question.answers.length; i < j; i++) {
+                answerModel.question.answers[i].showCommentArea = false;
+            }*/
 
-			/* Redirects to login */
-			answerModel.toLogin = function () {
-				window.location.href = '/auth/v0/github/connect';
-			};
+            /* Redirects to login */
+            answerModel.toLogin = function () {
+                window.location.href = '/auth/v0/github/connect';
+            };
 
-			/* Returns true if the logged user has voted down */
-			answerModel.checkVoteDown = function (users) {
-				var found = [];
-				if (!answerModel.user) {
-					return false;
-				}
-				if (users.length) {
-					found = users.filter(function (userId) {
-						return userId === answerModel.user._id;
-					});
-				}
+            /* Returns true if the logged user has voted down */
+            answerModel.checkVoteDown = function (users) {
+                if (!users) {
+                    users = [];
+                }
+                var found = [];
+                if (!answerModel.user) {
+                    return false;
+                }
+                if (users.length) {
+                    found = users.filter(function (userId) {
+                        return userId === answerModel.user._id;
+                    });
+                }
 
-				return found.length > 0;
-			};
+                return found.length > 0;
+            };
 
-			/* Returns true if the logged user is the author of the question */
-			answerModel.canCheckAnswer = function () {
-				if (!answerModel.user) {
-					return false;
-				}
+            /* Returns true if the logged user is the author of the question */
+            answerModel.canCheckAnswer = function () {
+                if (!answerModel.user) {
+                    return false;
+                }
 
-				var canCheck = true;
-				if (question.author._id === answerModel.user._id) {
-					for (var i = 0, j = question.answers.length; i < j && canCheck; i++) {
-						var answer = question.answers[i];
-						if (answer.checked) {
-							canCheck = false;
-						}
-					}
-				} else {
-					canCheck = false;
-				}
-				return canCheck;
-			};
+                var canCheck = true;
+                if (question.author._id === answerModel.user._id) {
+                    for (var i = 0, j = question.answers.length; i < j && canCheck; i++) {
+                        var answer = question.answers[i];
+                        if (answer.checked) {
+                            canCheck = false;
+                        }
+                    }
+                } else {
+                    canCheck = false;
+                }
+                return canCheck;
+            };
 
-			/* Shows/Hide the comment area */
-			answerModel.toggleCommentArea = function (model, $index) {
-				if (!userService.isLogged()) {
-					return;
-				}
+            /* Shows/Hide the comment area */
+            answerModel.toggleCommentArea = function (model, $index) {
+                if (!userService.isLogged()) {
+                    return;
+                }
 
-				if (model.cobjectId === 'answer') {
-					var oldValue = answerModel.question.answers[$index].showCommentArea || false;
-					answerModel.question.answers[$index].showCommentArea = !oldValue;
-					for (var i = 0, j = answerModel.question.answers.length; i < j; i++) {
-						if (i !== $index) {
-							answerModel.question.answers[i].showCommentArea = false;
-						}
-					}
-				} else {
-					answerModel.question.showCommentArea =!answerModel.question.showCommentArea;
-				}
-			};
+                if (model.cobjectId === 'answer') {
+                    var oldValue = answerModel.question.answers[$index].showCommentArea || false;
+                    answerModel.question.answers[$index].showCommentArea = !oldValue;
+                    for (var i = 0, j = answerModel.question.answers.length; i < j; i++) {
+                        if (i !== $index) {
+                            answerModel.question.answers[i].showCommentArea = false;
+                        }
+                    }
+                } else {
+                    answerModel.question.showCommentArea = !answerModel.question.showCommentArea;
+                }
+            };
 
-			/* Set to true the checked attribute of the answer */
-			answerModel.setChecked = function (question, answer) {
-				answer.checked = !answer.checked;
+            /* Set to true the checked attribute of the answer */
+            answerModel.setChecked = function (question, answer) {
+                answer.checked = !answer.checked;
 
-				answersService.updateModel(answer, ['checked'])
-					.then(function () {
-						return questionsService.updateModel(question, ['checked']);
-					})
-					.catch(function () {
-						console.error('Error during check answer');
-						answer.checked = false;
-						question.checked = false;
-					});
-			};
+                answersService.updateModel(answer, ['checked'])
+                    .then(function () {
+                        return questionsService.updateModel(question, ['checked']);
+                    })
+                    .catch(function () {
+                        console.error('Error during check answer');
+                        answer.checked = false;
+                        question.checked = false;
+                    });
+            };
 
-			/* Comment an answer or a question */
-			answerModel.commentQuestion = function (qModel, questionCommentText) {
-				if (!userService.isLogged()) {
-					return;
-				}
+            /* Comment an answer or a question */
+            answerModel.commentQuestion = function (qModel, questionCommentText) {
+                if (!userService.isLogged()) {
+                    return;
+                }
 
-				questionsService.commentQuestion(qModel, questionCommentText)
-					.then(function () {
-						answerModel.questionCommentText = '';
-					})
-					.catch(function (err) {
-						console.log('Not authorized');
-					});
-			};
+                questionsService.commentQuestion(qModel, questionCommentText)
+                    .then(function () {
+                        answerModel.questionCommentText = '';
+                    })
+                    .catch(function (err) {
+                        console.log('Not authorized');
+                    });
+            };
 
-			answerModel.commentAnswer = function (aModel, answerText) {
-				answersService.comment(aModel, answerText)
-					.then(function () {
-						answerModel.commentAnswerText = '';
-					})
-					.catch(function (err) {
-						console.log('Not authorized');
-					});
-			};
+            answerModel.commentAnswer = function (aModel, answerText) {
+                answersService.comment(aModel, answerText)
+                    .then(function () {
+                        answerModel.commentAnswerText = '';
+                    })
+                    .catch(function (err) {
+                        console.log('Not authorized');
+                    });
+            };
 
-			/* Vote up the coinstance */
-			answerModel.voteUp = function (qModel, aModel) {
-				if (!userService.isLogged()) {
-					return;
-				}
+            /* Vote up the coinstance */
+            answerModel.voteUp = function (qModel, aModel) {
+                if (!userService.isLogged()) {
+                    return;
+                }
 
-				if (!aModel) {
-					questionsService.voteUp(qModel)
-						.then(function (totalVote) {
-							answerModel.qTotalVote = totalVote || 0;
-						})
-						.catch(function () {
-							console.log('Not authorized');
-						});
-				} else {
-					answersService.voteUp(aModel)
-						.then(function (totalVote) {
-							aModel.totalVote = totalVote;
-						})
-						.catch(function () {
-							console.log('Not authorized');
-						});
-				}
-			};
+                if (!aModel) {
+                    questionsService.voteUp(qModel)
+                        .then(function (totalVote) {
+                            answerModel.qTotalVote = totalVote || 0;
+                        })
+                        .catch(function () {
+                            console.log('Not authorized');
+                        });
+                } else {
+                    answersService.voteUp(aModel)
+                        .then(function (totalVote) {
+                            aModel.totalVote = totalVote;
+                        })
+                        .catch(function () {
+                            console.log('Not authorized');
+                        });
+                }
+            };
 
-			/* Vote down the coinstance */
-			answerModel.voteDown = function (qModel, aModel) {
-				if (!userService.isLogged()) {
-					return;
-				}
+            /* Vote down the coinstance */
+            answerModel.voteDown = function (qModel, aModel) {
+                if (!userService.isLogged()) {
+                    return;
+                }
 
-				if (!aModel) {
-					questionsService.voteDown(qModel)
-						.then(function (totalVote) {
-							answerModel.qTotalVote = totalVote || 0;
-						})
-						.catch(function (err) {
-							console.log("Not authorized");
-						});
-				} else {
-					answersService.voteDown(aModel)
-						.then(function (totalVote) {
-							aModel.totalVote = totalVote;
-						})
-						.catch(function (err) {
-							console.log("Not authorized");
-						});
-				}
+                if (!aModel) {
+                    questionsService.voteDown(qModel)
+                        .then(function (totalVote) {
+                            answerModel.qTotalVote = totalVote || 0;
+                        })
+                        .catch(function (err) {
+                            console.log("Not authorized");
+                        });
+                } else {
+                    answersService.voteDown(aModel)
+                        .then(function (totalVote) {
+                            aModel.totalVote = totalVote;
+                        })
+                        .catch(function (err) {
+                            console.log("Not authorized");
+                        });
+                }
 
-			};
-		}
-	]);
+            };
+        }
+    ]);

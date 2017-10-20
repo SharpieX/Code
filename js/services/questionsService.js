@@ -142,7 +142,7 @@ angular
 
                 submitAnswer: function (question, nAnswer) {
                     var newAnswers = question.answers
-                    newAnswers.push(nAnswer.data);
+                    newAnswers.push(nAnswer.data.answer);
                     question.answers = newAnswers;
                     return this.updateModel(question, ['answers']);
                 }

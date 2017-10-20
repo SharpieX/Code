@@ -11,8 +11,8 @@ the tag that users can bind to the question.
 */
 angular
 	.module('stack')
-	.controller('askCtrl', ['$rootScope', '$http', '$location', 'userService', 'tagsService', 'questionsService',
-		function ($rootScope, $http, $location, userService, tagsService, questionsService) {
+	.controller('askCtrl', ['$rootScope', '$http', '$location', 'userService', 'tagsService', 'questionsService', 'Upload',
+		function ($rootScope, $http, $location, userService, tagsService, questionsService, Upload) {
 			var askModel = this;
 			askModel.cobj = {};
 			askModel.cobj.tags = [];
@@ -20,7 +20,23 @@ angular
 			askModel.cobj.answers = [];
 			askModel.cobj.views = 0;
 			askModel.questionSubmitted = false;
-            askModel.cobj.author = userService.getUserModel()._id
+           // askModel.cobj.author = userService.getUserModel()._id
+
+          /*  askModel.upload = function (file) {
+            	if(file) {
+                    Upload.upload({
+                        url: '/api/upload',
+                        data: {file: file}
+                    }).then(function (resp) {
+                        console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+                    }, function (resp) {
+                        console.log('Error status: ' + resp.status);
+                    }, function (evt) {
+                        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                    });
+                }
+            };*/
 
 			askModel.tags = [];
 			var tagName2Id = {};
