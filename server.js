@@ -20,5 +20,5 @@ app.use(bodyParser.json());                                     // parse applica
 //app.use(methodOverride());
 
 // listen (start app with node server.js) ======================================
-app.listen(8080);
+app.listen(80);
 console.log("App listening on port 8080");
