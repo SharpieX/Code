@@ -5,7 +5,7 @@ angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.rout
 
 angular
     .module('stack')
-    .config(function ($stateProvider, $urlRouterProvider, $provide, socialProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $provide, socialProvider, $locationProvider) {
         socialProvider.setFbKey({appId: '1459189657469557', apiVersion: "v2.4"});
 
         /* Textangular options, same options as StackOverflow */
@@ -87,6 +87,8 @@ angular
                     }
                 }
             });
+        // use the HTML5 History API
+        $locationProvider.html5Mode(true);
     })
     /*
         Before starting the application we're saving the user if present in the rootScope
