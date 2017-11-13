@@ -3,7 +3,7 @@
 
 angular
 	.module('stack.service')
-	.factory('answersService', ['$q', 'usersService', '$stamplay', '$http', function ($q, usersService, $stamplay, $http) {
+	.factory('answersService', ['$q', 'userService', '$stamplay', '$http', function ($q, userService, $stamplay, $http) {
 
 		function _getTotalVotes(model) {
 			return model.actions.votes.users_upvote.length - model.actions.votes.users_downvote.length
@@ -12,6 +12,8 @@ angular
 		return {
 
             createAnswer: function (params) {
+                var authorId = userService.getUserModel()._id;
+                params.author = authorId;
                 return $http({
                     method: 'POST',
                     url: '/api/saveAnswer',
@@ -20,18 +22,24 @@ angular
             },
 
 			updateModel: function (answer, attrs) {
-				var checkedAnswer = {};
-				attrs.forEach(function (key) {
-					checkedAnswer[key] = answer[key];
-				});
-				
-                checkedAnswer._id = answer._id;
-                return $http({
-                    method: 'POST',
-                    url: '/api/updateAnswer',
-                    data: checkedAnswer,
-                })
+				var answerModel = {};
 
+				attrs.forEach(function (key) {
+					var answerIDs = [];
+					for (var i = 0; i < answer[key].length; i += 1) {
+						answerIDs.push(answer[key][i]._id);
+					}
+					;
+					answerModel[key] = answerIDs;
+				});
+
+				answerModel._id = answer._id;
+
+				return $http({
+					method: 'POST',
+					url: '/api/updateAnswer',
+					data: answerModel,
+				})
 			},
 
 			voteUp: function (aModel) {
@@ -68,21 +76,12 @@ angular
 				return def.promise;
 			},
 
-			comment: function (aModel, commentText) {
-				var def = $q.defer();
-				//cache populate data
-				var answer = aModel;
+			comment: function (aModel, comment) {
+				var newComments = aModel.comments ? aModel.comments:[];
+				newComments.push(comment.data.data);
+				aModel.comments = newComments;
+				return this.updateModel(aModel, ['comments']);
 
-				$stamplay.Object("answer").comment(answer._id, commentText)
-					.then(function (res) {
-						answer.actions = res.actions;
-						def.resolve();
-					})
-					.catch(function (err) {
-						def.reject(err);
-					})
-
-				return def.promise;
 			},
 
 			getById: function (answerId) {

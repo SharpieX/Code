@@ -3,14 +3,14 @@
 
 angular
     .module('stack.service')
-    .factory('questionsService', ['$q', 'usersService', 'tagsService', 'answersService', '$stamplay', '$http',
-        function ($q, usersService, tagsService, answersService, $stamplay, $http) {
+    .factory('questionsService', ['$q', 'userService', 'tagsService', 'answersService', '$stamplay', '$http',
+        function ($q, userService, tagsService, answersService, $stamplay, $http) {
 
             var questions = [];
             var pagination = {};
 
             function _getTotalVotes(model) {
-                return model.actions.votes.users_upvote.length - model.actions.votes.users_downvote.length
+                return model.users_upvote.length - model.users_downvote.length
             }
 
             return {
@@ -61,16 +61,12 @@ angular
                     var questionModel = {};
 
                     attrs.forEach(function (key) {
-                        if (key !== 'answers' && key !== 'owner' && key !== 'tags' && key !== "author") {
-                            questionModel[key] = question[key];
-                        } else {
-                            var answerIDs = [];
-                            for (var i = 0; i < question[key].length; i += 1) {
-                                answerIDs.push(question[key][i]._id);
-                            }
-                            ;
-                            questionModel.answers = answerIDs;
+                        var answerIDs = [];
+                        for (var i = 0; i < question[key].length; i += 1) {
+                            answerIDs.push(question[key][i]._id);
                         }
+                        ;
+                        questionModel[key] = answerIDs;
                     });
 
                     questionModel._id = question._id;
@@ -81,19 +77,19 @@ angular
                     })
                 },
 
-                voteUp: function (qModel) {
+                voteUp: function (qModel,user) {
                     var def = $q.defer();
                     //cache populate data
                     var question = qModel;
-
-                    $stamplay.Object("question").upVote(qModel._id)
-                        .then(function (res) {
-                            question.actions = res.actions
-                            def.resolve(_getTotalVotes(question));
-                        })
-                        .catch(function (err) {
-                            def.reject(err);
-                        })
+					var users_upvote = question.users_upvote ? question.users_upvote : [];
+					users_upvote.push(user._id);
+					question.users_upvote = users_upvote;
+                    this.updateModel(question, ['users_upvote']).then(function(){
+						def.resolve(_getTotalVotes(question));
+                    })
+					.catch(function (err) {
+						def.reject(err);
+					})
 
                     return def.promise;
                 },
@@ -115,21 +111,11 @@ angular
                     return def.promise;
                 },
 
-                commentQuestion: function (qModel, commentText) {
-                    var def = $q.defer();
-                    //cache populate data
-                    var question = qModel;
-
-                    $stamplay.Object("question").comment(question._id, commentText)
-                        .then(function (res) {
-                            question.actions = res.actions;
-                            def.resolve(question);
-                        })
-                        .catch(function (err) {
-                            def.reject(err);
-                        })
-
-                    return def.promise;
+                commentQuestion: function (question, comment) {
+                    var newComments = question.comments
+                    newComments.push(comment.data.data);
+                    question.comments = newComments;
+                    return this.updateModel(question, ['comments']);
                 },
 
                 saveQuestion: function (params) {

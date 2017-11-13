@@ -88,7 +88,7 @@ angular
                 }
             });
         // use the HTML5 History API
-        $locationProvider.html5Mode(true);
+       //$locationProvider.html5Mode(true);
     })
     /*
         Before starting the application we're saving the user if present in the rootScope

@@ -29,7 +29,8 @@
     "angular-bootstrap": "~1.2.5",
     "angularjs-social-login": "^2.6.1",
     "bootstrap-social": "^5.1.1",
-    "ng-file-upload": "^12.2.13"
+    "ng-file-upload": "^12.2.13",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {}
 }
