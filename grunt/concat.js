@@ -51,6 +51,7 @@ module.exports = {
 			"js/services/tagsService.js",
 			"js/services/questionsService.js",
 			"js/services/answersService.js",
+			"js/services/commentService.js",
 			"js/services/angular-stamplay.js"
 		],
 		dest: './dist/services.js'
