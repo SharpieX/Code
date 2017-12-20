@@ -6,15 +6,15 @@
         <h4><strong>All questions</strong></h4>
       </div>
       <div class="col-md-4 pull-right" id="tabs">
-        <a ng-class="{youarehere : home.sort==='-dt_create'}" 
+        <a ng-class="{youarehere : home.sort==='-dt_create'}"
         ng-click="home.sortQuestion('newest')">newest</a>
-        <a ng-class="{youarehere : home.sort === '-actions.votes.total'}"  
+        <a ng-class="{youarehere : home.sort === '-actions.votes.total'}"
         ng-click="home.sortQuestion('votes')">votes</a>
         <a ng-class="{youarehere : home.sort === '-dt_update'}"
         ng-click="home.sortQuestion('active')">active</a>
       </div>
     </div>
-    
+
     <ul class="question-list" infinite-scroll="home.loadNext(home.page)" infinite-scroll-disabled="home.busy" infinite-scroll-distance="1">
       <li class="question-row" ng-repeat="q in home.questions">
         <div class="row">
@@ -23,7 +23,7 @@
 
             <div class="row">
               <div class="col-md-4 numbers">{{q.actions.votes.users_upvote.length - q.actions.votes.users_downvote.length}}</div>
-              <div class="col-md-4 numbers" 
+              <div class="col-md-4 numbers"
                 ng-class="{
                   answered   :  q.haveAnswers, 
                   unanswered : !q.haveAnswers, 
@@ -45,7 +45,7 @@
                 answers</div>
               <div class="col-md-4 no-padding small views">views</div>
             </div>
-            
+
           </div>
 
           <div class="col-md-9">
@@ -61,7 +61,7 @@
               </div>
               <div class="col-md-6 pull-right" ng-show="sort.active">
                 updated {{q.dt_update | date:"mediumDate"}} by {{q.author.name || 'name not shared'}}
-              </div>          
+              </div>
             </div>
           </div>
 
@@ -76,20 +76,4 @@
       </li>
     </ul>
 </div>
-  <div class="col-md-2 text-center">
-    <div class="summarycount al">{{home.total}}</div>
-    <strong>questions</strong>
-
-    <div id="hireme" class=" blue looking tagged">
-      <a href="#" class="top" target="_blank">
-        <span>Advertiesments?</span>
-      </a> 
-      <ul class="jobs"> 
-        <li> 
-        </li>
-        <li> 
-         </li> 
-       </ul> 
-</div>
-  </div>
 </div>

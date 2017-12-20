@@ -20,7 +20,11 @@ angular
 			askModel.cobj.answers = [];
 			askModel.cobj.views = 0;
 			askModel.questionSubmitted = false;
-            askModel.cobj.author = userService.getUserModel()._id
+            askModel.cobj.author = userService.getUserModel()._id;
+
+			userService.getUserModel().then(function (response) {
+				askModel.cobj.author = response._id;
+			});
 
           /*  askModel.upload = function (file) {
             	if(file) {

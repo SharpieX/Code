@@ -3,7 +3,7 @@
 
 angular
     .module('stack.service')
-    .factory('userService', ['$q', '$http', '$stamplay', "$rootScope", function ($q, $http, $stamplay, $rootScope) {
+    .factory('userService', ['$q', '$http', '$stamplay', "$rootScope", 'Account',  function ($q, $http, $stamplay, $rootScope, Account) {
 
         var logged = false;
         var user;
@@ -12,41 +12,28 @@ angular
             isLogged: function () {
                 return logged;
             },
-            setUserModal: function (val) {
-                var def = $q.defer();
-                $http({
-                    method: 'GET',
-                    url: '/api/authUser/id',
-                    params: {id: val.uuid}
-                }).then(function (response) {
-                    if (!response.data.err) {
-                        logged = true;
-                        user = response.data.data;
-                        def.resolve(response);
-                    } else if (response.data.err === 2) {
-                        $http({
-                            method: 'POST',
-                            url: '/api/saveUser',
-                            data: val,
-                        }).then(function (response) {
-                            if (!response.err) {
-                                logged = true;
-                                user = response.data.data;
-                                def.resolve(response);
-                            }
-                        })
-                    }
-                }).catch(function (err) {
-                        def.reject(err);
-                    });
+	        getUserModel: function () {
+		        var def = $q.defer();
 
-                return def.promise;
+		        Account.getProfile()
+		        .then(function(res) {
+			        if (res.data.hasOwnProperty('_id')) {
+				        //res.user.points = res.user.points || 0;
+				        logged = true;
+				        def.resolve(res.data);
+			        } else {
+				        logged = false;
+				        def.resolve(false)
+			        }
+
+		        })
+		        .catch(function (err) {
+			        def.reject(err);
+		        });
 
 
-            },
-            getUserModel: function () {
-                return user;
-            }
+		        return def.promise;
+	        }
         };
     }])
 

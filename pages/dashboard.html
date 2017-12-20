@@ -1,0 +1,61 @@
+<!--<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-1">
+            </div>
+            <div class="col-md-6 ng-cloak">
+                <ul class="nav navbar-nav pull-right">
+                    <li ng-hide="user._id">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#myModal"
+                                style="background: transparent;color: white;">Login
+                        </button>
+                    </li>
+                    <li class="dropdown pull-right" ng-show="user._id">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            {{user.displayName}}
+                            <img ng-src="{{user.profileImg}}" style="width:24px; height:24px; margin-left:20px;">
+                            {{user.points || 0}}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li><a href="" ng-click="logout()">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+
+<div class="container" style="padding-bottom: 30px;">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="header">
+
+                <div class="row" style="margin-top:50px; margin-bottom:20px;">
+                    <div class="col-md-4">
+                        <div id="hlogo">
+                        </div>
+                        <h3 style="display: inline;color:#000;font-size: 30px;"
+                            class="text-muted">ILC</h3>
+                    </div>
+
+                    <div class="col-md-8 nav mainnavs">
+                        <ul ng-controller="menuCtrl" class="nav nav-pills s-menu">
+                            <li ng-class="{youarehere : url == '/'}"><a ui-sref="home">Home</a></li>
+                            <li ng-class="{youarehere : url == '/tags'}"><a ui-sref="tags">Tags</a></li>
+                            <li ng-class="{youarehere : url == '/users'}"><a ui-sref="users">Users</a></li>
+                            <li ng-class="{youarehere : url == '/questions/ask'}"
+                                class="pull-right"
+                                ng-show="user._id">
+                                <a ui-sref="ask">Ask a question</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div ui-view></div>
+        </div>
+    </div>
+</div> <!-- /container -->

@@ -1,0 +1,255 @@
+<section class="hero" id="intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-right navicon">
+                <a id="nav-toggle" class="nav_slide_button" href="#"><span></span></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center inner">
+                <div class="animatedParent">
+                    <h1 class="animated fadeInDown">Integrated Learning Center</h1>
+                    <p class="animated fadeInUp text-between">Keep Learning</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <a href="#about" class="learn-more-btn btn-scroll">Get Started</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Navigation -->
+<div id="navigation">
+    <nav class="navbar navbar-custom" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="site-logo">
+                        <a ui-sref="intro" class="brand">ILC</a>
+                    </div>
+                </div>
+
+
+                <div class="col-md-10">
+
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="menu">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="#intro" ng-click="goTo($event)">Home</a></li>
+                            <li><a href="#about" ng-click="goTo($event)">About Us</a></li>
+                            <li><a href="#service" ng-click="goTo($event)">Services</a></li>
+                            <li ng-if="isAuthenticated()"><a ui-sref="profile">Profile</a></li>
+                            <li ng-if="!isAuthenticated()"><a ui-sref="login">Login</a></li>
+                            <li ng-if="isAuthenticated()"><a ui-sref="logout">Logout</a></li>
+                            <li><a href="#contact" ng-click="goTo($event)" >Contact</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.Navbar-collapse -->
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </nav>
+</div>
+<!-- /Navigation -->
+
+<!-- Section: about -->
+<section id="about" class="home-section color-dark bg-white">
+    <div class="container marginbot-50">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="animatedParent">
+                    <div class="section-heading text-center animated bounceInDown">
+                        <h2 class="h-bold">About the team</h2>
+                        <div class="divider-header"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+
+        <div class="row">
+
+
+            <div class="col-lg-8 col-lg-offset-2 animatedParent">
+                <div class="text-center">
+                    <p>
+                        We,at Integrated Learning Centre, attempt to provide an alternative to traditional education system with the help of technology. A place where we thrive to achieve universal education and develop critical thinking in our children.
+                        We are a team of education enthusiasts who aim at restructuring the mode of education delivery. An online platform that is affordable as well as accessible to all
+                        A dedicated faculty trying to innovate with teaching methods will now be available to our children just a click away. Currently we are focusing in the field of Mathematics, Physics, Chemistry, and Biology with a future vision of delving into all the fields relevant to a child's bright future.
+                    </p>
+                    <a href="#service" class="btn btn-skin btn-scroll">What we do</a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</section>
+<!-- /Section: about -->
+
+
+<!-- Section: services -->
+<section id="service" class="home-section color-dark bg-gray">
+    <div class="container marginbot-50">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div>
+                    <div class="section-heading text-center">
+                        <h2 class="h-bold">What we can do for you</h2>
+                        <div class="divider-header"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-center">
+        <div class="container">
+
+            <div class="row animatedParent">
+                <div class="col-md-4">
+                    <div class="animated rotateInDownLeft">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <span class="fa fa-book fa-2x"></span>
+                            </div>
+                            <div class="service-desc">
+                                <h5>Learning Material</h5>
+                                <div class="divider-header"></div>
+                                <p>
+                                    We provides the best comprehensive study material and preparation book with thousands of solved examples,
+                                </p>
+                                <a href="#contact" ng-click="goTo($event)" class="btn btn-skin">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="animated rotateInDownLeft slow">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <span class="fa fa-laptop fa-2x"></span>
+                            </div>
+                            <div class="service-desc">
+                                <h5>Live Class</h5>
+                                <div class="divider-header"></div>
+                                <p>
+                                    Get best tuition online with one to one live online tutoring. Online education with tutor for homework help, exam help, prepare for IIT JEE, CBSE, ICSE, NTSE, PSA & IMO.
+                                </p>
+                                <a href="#contact" ng-click="goTo($event)" class="btn btn-skin">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="animated rotateInDownLeft slower">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <span class="fa fa-question fa-2x"></span>
+                            </div>
+                            <div class="service-desc">
+                                <h5>Ask A question</h5>
+                                <div class="divider-header"></div>
+                                <p>
+                                    Ask A Question is a unique platform through which students can ask questions and we answer them. Students can ask questions either through our forum or live sessions.
+                                </p>
+                                <a ui-sref="home"  class="btn btn-skin">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section: contact -->
+<section id="contact" class="home-section nopadd-bot color-dark bg-gray text-center">
+    <div class="container marginbot-50">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="animatedParent">
+                    <div class="section-heading text-center">
+                        <h2 class="h-bold animated bounceInDown">Get in touch with us</h2>
+                        <div class="divider-header"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="row marginbot-80">
+            <div class="col-md-8 col-md-offset-2">
+                <div id="sendmessage">Your message has been sent. Thank you!</div>
+                <div id="errormessage"></div>
+                <form id="contact-form" action="" method="post" role="form" class="contactForm">
+                    <div class="row marginbot-20">
+                        <div class="col-md-6 xs-marginbot-20">
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <div class="validation"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                                <div class="validation"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                                <div class="validation"></div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                                <div class="validation"></div>
+                            </div>
+                            <button type="submit" class="btn btn-skin btn-lg btn-block" id="btnContactUs">
+                                Send Message</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+<!-- /Section: contact -->
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="footer-menu">
+                    <li><a href="#">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

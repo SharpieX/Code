@@ -8,6 +8,7 @@
 
 .question-list{
 	padding-left: 0px;
+	margin-top: 20px;
 }
 
 .no-padding{
@@ -92,16 +93,11 @@
 }
 
 body{
-	padding-top: 30px;
   background: #fff;
   color: #000;
   font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
 }
 
-.navbar{
-	min-height: 30px;
-	max-height: 30px;
-}
 
 .navbar-brand{
 	line-height: 0px;

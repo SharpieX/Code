@@ -20,7 +20,10 @@ angular
             questionsService.updateViews(question);
         }
 
-        answerModel.user = $rootScope.user;
+	    userService.getUserModel().then(function (response) {
+		    answerModel.user = response;
+	    });
+
         answerModel.question = question;
         answerModel.question.showCommentArea = false;
 
