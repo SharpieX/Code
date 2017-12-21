@@ -1,5 +1,5 @@
 angular.module('stack')
-.controller('ProfileCtrl', function($scope, $auth, toastr, Account) {
+.controller('ProfileCtrl', ['$scope', '$auth', 'toastr', 'Account', function($scope, $auth, toastr, Account) {
 	$scope.getProfile = function() {
 		Account.getProfile()
 		.then(function(response) {
@@ -40,4 +40,4 @@ angular.module('stack')
 	};
 
 	$scope.getProfile();
-});
+}]);

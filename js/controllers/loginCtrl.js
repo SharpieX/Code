@@ -1,8 +1,8 @@
 angular.module('stack')
-.controller('LoginCtrl', function($scope, $location, $auth, toastr, $state, userService, $rootScope) {
-	$scope.login = function() {
+.controller('LoginCtrl', ['$scope', '$location', '$auth', 'toastr', '$state', 'userService', '$rootScope', function ($scope, $location, $auth, toastr, $state, userService, $rootScope) {
+	$scope.login = function () {
 		$auth.login($scope.user)
-		.then(function() {
+		.then(function () {
 			toastr.success('You have successfully signed in!');
 			$state.go('intro');
 			userService.getUserModel()
@@ -10,18 +10,18 @@ angular.module('stack')
 				$rootScope.user = userResp;
 			});
 		})
-		.catch(function(error) {
+		.catch(function (error) {
 			toastr.error(error.data.message, error.status);
 		});
 	};
-	$scope.authenticate = function(provider) {
+	$scope.authenticate = function (provider) {
 		$auth.authenticate(provider)
-		.then(function() {
+		.then(function () {
 			toastr.success('You have successfully signed in with ' + provider + '!');
 			//$location.path('/');
 			$state.go('intro')
 		})
-		.catch(function(error) {
+		.catch(function (error) {
 			if (error.message) {
 				// Satellizer promise reject error.
 				toastr.error(error.message);
@@ -33,4 +33,4 @@ angular.module('stack')
 			}
 		});
 	};
-});
+}]);

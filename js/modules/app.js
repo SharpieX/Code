@@ -1,16 +1,18 @@
 /*global angular*/
 'use strict';
 
-angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.router', 'ui.bootstrap', 'textAngular', 'ngStamplay', 'socialLogin', 'ngFileUpload', 'satellizer','toastr']);
+angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.router', 'ui.bootstrap', 'textAngular', 'ngStamplay', 'socialLogin', 'ngFileUpload', 'satellizer', 'toastr']);
 
 angular
 .module('stack')
-.run(['$rootScope', 'userService',
-	function ($rootScope, userService) {
-		userService.getUserModel()
-		.then(function (userResp) {
-			$rootScope.user = userResp;
-		});
+.run(['$rootScope', 'userService','$auth',
+	function ($rootScope, userService, $auth) {
+		if ($auth.isAuthenticated()) {
+			userService.getUserModel()
+			.then(function (userResp) {
+				$rootScope.user = userResp;
+			});
+		}
 	}
 
 ])
@@ -30,13 +32,13 @@ angular
 		scopeDelimiter: ',',
 		display: 'popup',
 		oauthType: '2.0',
-		popupOptions: { width: 580, height: 400 }
+		popupOptions: {width: 580, height: 400}
 	});
 
 	/**
 	 * Helper auth functions
 	 */
-	var skipIfLoggedIn = ['$q', '$auth', function($q, $auth) {
+	var skipIfLoggedIn = ['$q', '$auth', function ($q, $auth) {
 		var deferred = $q.defer();
 		if ($auth.isAuthenticated()) {
 			deferred.reject();
@@ -46,7 +48,7 @@ angular
 		return deferred.promise;
 	}];
 
-	var loginRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
+	var loginRequired = ['$q', '$location', '$auth', function ($q, $location, $auth) {
 		var deferred = $q.defer();
 		if ($auth.isAuthenticated()) {
 			deferred.resolve();
