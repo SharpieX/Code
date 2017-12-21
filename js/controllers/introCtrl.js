@@ -3,8 +3,6 @@ angular
 .controller('introCtrl', ['questionsService', '$scope', '$auth',
 	function (questionsService, $scope, $auth) {
 		angular.element('#navigation').sticky({topSpacing: 0});
-		jQuery.event.trigger('appear');
-
 		$scope.goTo = function ($event) {
 			var $anchor = $($event.currentTarget);
 			var nav = $($anchor.attr('href'));

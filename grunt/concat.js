@@ -32,6 +32,8 @@ module.exports = {
 		src: [
 			'js/lib/ng-infinite-scroll.js',
 			'js/lib/ui-bootstrap-0.11.0.min.js',
+			'js/intro/custom.js',
+			'js/intro/css3-animate-it.js',
 			'bower_components/momentjs/min/moment.min.js'
 		],
 		dest: './dist/libs.min.js'
