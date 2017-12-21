@@ -19,7 +19,11 @@ angular.module('stack')
 		.then(function () {
 			toastr.success('You have successfully signed in with ' + provider + '!');
 			//$location.path('/');
-			$state.go('intro')
+			$state.go('intro');
+			userService.getUserModel()
+			.then(function (userResp) {
+				$rootScope.user = userResp;
+			});
 		})
 		.catch(function (error) {
 			if (error.message) {
