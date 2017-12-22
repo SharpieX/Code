@@ -187,3 +187,29 @@ angular
 	// use the HTML5 History API
 	//$locationProvider.html5Mode(true);
 })
+.controller('UploadImageModalInstance', function ($scope, $uibModalInstance, Upload) {
+	$scope.progress = 0;
+	$scope.files = [];
+	$scope.upload = function (file) {
+		if (file) {
+			Upload.upload({
+				url: 'api/upload',
+				data: {file: file}
+			}).then(function (resp) {
+				$scope.progress = 0;
+				$scope.image = window.location.origin + "/api/resources/uuid?uuid=" + resp.data.uuid;
+				console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+			}, function (resp) {
+				console.log('Error status: ' + resp.status);
+			}, function (evt) {
+				var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+				$scope.progress = progressPercentage;
+				console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+			});
+		}
+	}
+
+	$scope.insert = function () {
+		$uibModalInstance.close($scope.image);
+	};
+});
