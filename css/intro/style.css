@@ -641,7 +641,6 @@ hr.bold {
 
 .validation {
     color: red;
-    display:none;
     margin: 0 0 20px;
     font-weight:400;
     font-size:13px;
@@ -650,7 +649,6 @@ hr.bold {
 #sendmessage {
     color: green;
     border:1px solid green;
-    display:none;
     text-align:center;
     padding:15px;
     font-weight:600;
@@ -659,7 +657,6 @@ hr.bold {
 
 #errormessage {
     color: red;
-    display:none;
     border:1px solid red;
     text-align:center;
     padding:15px;
