@@ -87,13 +87,13 @@ angular
 						askModel.cobj.tags = [];
 						askModel.cobj.answers = [];
 						askModel.cobj.views = 0;
-						askModel.cobj.author = userService.getUserModel()._id
-						askModel.cobj.owner = userService.getUserModel()._id
+						askModel.cobj.author = ''
+						askModel.cobj.owner = ''
 						askModel.cobj.text = '';
 						askModel.current = '';
 						askModel.questionSubmitted = true;
 						askModel.busy = false;
-						$location.url('/index');
+						$location.url('/dashboard');
 
 					})
 					.catch(function (err) {

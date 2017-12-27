@@ -12,12 +12,15 @@ angular
 				};
 
 			}
-            answModel.user = userService.getUserModel();
+			userService.getUserModel().then(function (response) {
+				answModel.user = response;
+			});
+
 			answModel.successInCreation = false;
 			answModel.errorInCreation = false;
 
 			answModel.createAnswer = function (questionModel) {
-				answersService.createAnswer(answModel.newAnswer)
+				answersService.createAnswer(answModel.newAnswer,answModel.user )
 					.then(function (nAnswer) {
 
 						nAnswer.author = answModel.user;

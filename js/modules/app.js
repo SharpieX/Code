@@ -1,7 +1,7 @@
 /*global angular*/
 'use strict';
 
-angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.router', 'ui.bootstrap', 'textAngular', 'ngStamplay', 'socialLogin', 'ngFileUpload', 'satellizer', 'toastr']);
+angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.router', 'ui.bootstrap', 'textAngular', 'ngStamplay', 'socialLogin', 'ngFileUpload', 'satellizer', 'toastr', 'ngMaterial','ngMessages']);
 
 angular
 .module('stack')
@@ -16,7 +16,7 @@ angular
 	}
 
 ])
-.config(function ($stateProvider, $urlRouterProvider, $provide, socialProvider, $locationProvider, $authProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $provide, socialProvider, $locationProvider, $authProvider, $mdThemingProvider) {
 
 	$authProvider.loginUrl = '/api/auth/login';
 	$authProvider.signupUrl = '/api/auth/signup';
@@ -35,6 +35,7 @@ angular
 		popupOptions: {width: 580, height: 400}
 	});
 
+	$mdThemingProvider.theme('default').primaryColor("blue").accentColor("red");
 	/**
 	 * Helper auth functions
 	 */
@@ -212,4 +213,13 @@ angular
 	$scope.insert = function () {
 		$uibModalInstance.close($scope.image);
 	};
-});
+})
+.controller('sideNav', function($scope, $mdSidenav) {
+	$scope.showMobileMainHeader = true;
+	$scope.openSideNavPanel = function() {
+		$mdSidenav('left').open();
+	};
+	$scope.closeSideNavPanel = function() {
+		$mdSidenav('left').close();
+	};
+})

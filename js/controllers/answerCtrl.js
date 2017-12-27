@@ -116,7 +116,7 @@ angular
                 return;
             }
 
-            commentsService.createComment(qModel, questionCommentText)
+            commentsService.createComment(qModel, questionCommentText, answerModel.user)
             .then(function (comment) {
                 questionsService.commentQuestion(qModel, comment)
                 .then(function () {
@@ -130,7 +130,7 @@ angular
 
         answerModel.commentAnswer = function (aModel, answerText) {
 
-            commentsService.createComment(aModel, answerText)
+            commentsService.createComment(aModel, answerText, answerModel.user)
             .then(function (comment) {
                 answersService.comment(aModel,comment)
                 .then(function () {

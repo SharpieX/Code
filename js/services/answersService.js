@@ -11,9 +11,8 @@ angular
 
 		return {
 
-            createAnswer: function (params) {
-                var authorId = userService.getUserModel()._id;
-                params.author = authorId;
+            createAnswer: function (params,author) {
+                params.author = author._id;
                 return $http({
                     method: 'POST',
                     url: '/api/saveAnswer',

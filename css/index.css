@@ -40,12 +40,9 @@
 	color: #999;
 }
 
-.question-title{
-	margin: 0px;
-	font-weight: bold;
-	color: #07c;
-	text-decoration: none;
-	cursor: pointer;
+.question-info{
+	float:right;
+	margin-right:3%;
 }
 
 .summarycount{
@@ -152,4 +149,28 @@ body{
 .nav.s-menu>li>a:hover, .nav.s-menu>li>a:focus {
 	text-decoration: none;
 	background-color: #f90!important;
+}
+
+.password-strength-indicator {
+	position: absolute;
+	top: 10px;
+	right: 0;
+	width: 5px;
+	padding: 0 15px;
+}
+
+.password-strength-indicator span {
+	display: block;
+	width: 5px;
+	height: 5px;
+	margin-bottom: 2px;
+	background: #ebeef1;
+	border-radius: 5px;
+}
+
+span.logo {
+	color: white !important;
+	font-weight: bold;
+	font-size: 1.4em;
+	letter-spacing: 3px;
 }
