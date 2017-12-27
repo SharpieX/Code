@@ -1,7 +1,7 @@
 /*global angular*/
 'use strict';
 
-angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.router', 'ui.bootstrap', 'textAngular', 'ngStamplay', 'socialLogin', 'ngFileUpload', 'satellizer', 'toastr', 'ngMaterial','ngMessages']);
+angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.router', 'ui.bootstrap', 'textAngular', 'ngStamplay', 'ngFileUpload', 'satellizer', 'toastr', 'ngMaterial','ngMessages']);
 
 angular
 .module('stack')
