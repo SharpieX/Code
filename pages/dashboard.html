@@ -98,7 +98,7 @@
     <md-toolbar class="desktop">
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" aria-label="Side Panel" ng-click="openSideNavPanel()">
-                <md-tooltip>Side Panel</md-tooltip>
+                <md-tooltip>Open Navigation Panel</md-tooltip>
                 <md-icon class="md-default-theme" class="material-icons">&#xE5D2;</md-icon>
             </md-button>
             <md-button class="md-icon-button" aria-label="Icon">
@@ -126,15 +126,15 @@
     <md-toolbar class="tablet">
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" aria-label="Side Panel" ng-click="openSideNavPanel()">
-                <md-tooltip>Open Side Panel</md-tooltip>
+                <md-tooltip>Open Navigation Panel</md-tooltip>
                 <md-icon class="md-default-theme" class="material-icons">&#xE5D2;</md-icon>
             </md-button>
             <md-button class="md-icon-button" aria-label="Icon">
                 <md-tooltip>User</md-tooltip>
-                <md-icon class="md-default-theme" md-svg-icon="/img/fb.svg"></md-icon>
+               <!-- <md-icon class="md-default-theme" md-svg-icon="/img/fb.svg"></md-icon>-->
             </md-button>
             <h2>
-                <span>Heading</span>
+                <span style="color:white">ILC</span>
             </h2>
             <md-input-container md-no-float class="md-accent" flex="50" style="padding-bottom:0px;margin-left:25px">
                 <md-icon style="color:wheat" class="material-icons">&#xE8B6;</md-icon>
@@ -147,22 +147,22 @@
             </md-button>
             <md-button class="md-icon-button" aria-label="Messages">
                 <md-tooltip>Messages</md-tooltip>
-                <img src="/img/messages.png" style="width:24px;height:24px;"/>
+                <a ui-sref="ask"> <img src="/img/messages.png" style="width:24px;height:24px;"/> </a>
             </md-button>
         </div>
     </md-toolbar>
     <md-toolbar class="mobile">
         <div class="md-toolbar-tools" data-ng-show="showMobileMainHeader">
             <md-button class="md-icon-button" aria-label="Side Panel" ng-click="openSideNavPanel()">
-                <md-tooltip>Open Side Panel</md-tooltip>
+                <md-tooltip>Open Navigation Panel</md-tooltip>
                 <md-icon class="md-default-theme" class="material-icons">&#xE5D2;</md-icon>
             </md-button>
             <md-button class="md-icon-button" aria-label="Icon">
-                <md-tooltip>Icon</md-tooltip>
-                <md-icon class="md-default-theme" md-svg-icon="/img/fb.svg"></md-icon>
+                <md-tooltip>Logo</md-tooltip>
+                <!--<md-icon class="md-default-theme" md-svg-icon="/img/fb.svg"></md-icon>-->
             </md-button>
             <h2>
-                <span>Heading</span>
+                <span style="color:white">ILC</span>
             </h2>
             <span flex></span>
             <md-button class="md-icon-button" aria-label="Search" data-ng-click="showMobileMainHeader = false">
@@ -175,7 +175,7 @@
             </md-button>
             <md-button class="md-icon-button" aria-label="Messages">
                 <md-tooltip>Messages</md-tooltip>
-                <img src="/img/messages.png" style="width:24px;height:24px;"/>
+                <a ui-sref="ask"> <img src="/img/messages.png" style="width:24px;height:24px;"/> </a>
             </md-button>
         </div>
         <div class="md-toolbar-tools" data-ng-hide="showMobileMainHeader">
