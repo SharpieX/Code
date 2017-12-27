@@ -16,7 +16,7 @@ angular
 	}
 
 ])
-.config(function ($stateProvider, $urlRouterProvider, $provide, socialProvider, $locationProvider, $authProvider, $mdThemingProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $provide, $locationProvider, $authProvider, $mdThemingProvider) {
 
 	$authProvider.loginUrl = '/api/auth/login';
 	$authProvider.signupUrl = '/api/auth/signup';
