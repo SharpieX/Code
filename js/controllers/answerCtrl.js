@@ -58,11 +58,11 @@ angular
 
         /* Returns true if the logged user is the author of the question */
         answerModel.canCheckAnswer = function () {
-            if (!answerModel.user) {
-                return false;
-            }
+	        if (answerModel.user && answerModel.user.role === 'admin') {
+		        return true;
+	        }
 
-            var canCheck = true;
+            /*var canCheck = true;
             if (question.author._id === answerModel.user._id) {
                 for (var i = 0, j = question.answers.length; i < j && canCheck; i++) {
                     var answer = question.answers[i];
@@ -72,8 +72,8 @@ angular
                 }
             } else {
                 canCheck = false;
-            }
-            return canCheck;
+            }*/
+            return false;
         };
 
         /* Shows/Hide the comment area */
@@ -99,14 +99,19 @@ angular
         answerModel.setChecked = function (question, answer) {
             answer.checked = !answer.checked;
 
-            answersService.updateModel(answer, ['checked'])
+	        /*answersService.updateModel(answer, ['checked'])
+	        .then(function () {
+		        return questionsService.updateModel(question, ['checked']);
+	        })*/
+            answersService.updateModel(answer, 'checked')
             .then(function () {
-                return questionsService.updateModel(question, 'checked');
+                console.log('Verifed answer');
+                //return questionsService.updateModel(question, ['checked']);
             })
             .catch(function () {
                 console.error('Error during check answer');
                 answer.checked = false;
-                question.checked = false;
+                //question.checked = false;
             });
         };
 

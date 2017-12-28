@@ -22,15 +22,18 @@ angular
 
 			updateModel: function (answer, attrs) {
 				var answerModel = {};
-
-				attrs.forEach(function (key) {
-					var answerIDs = [];
-					for (var i = 0; i < answer[key].length; i += 1) {
-						answerIDs.push(answer[key][i]._id);
-					}
-					;
-					answerModel[key] = answerIDs;
-				});
+				if(Array.isArray(attrs)){
+					attrs.forEach(function (key) {
+						var answerIDs = [];
+						for (var i = 0; i < answer[key].length; i += 1) {
+							answerIDs.push(answer[key][i]._id);
+						}
+						;
+						answerModel[key] = answerIDs;
+					});
+				} else {
+					answerModel[attrs] = answer[attrs];
+				}
 
 				answerModel._id = answer._id;
 

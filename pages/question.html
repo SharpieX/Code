@@ -102,7 +102,7 @@
 							'vote-down-off': !answer.checkVoteDown(aswr.actions.votes.users_downvote) }"
 									   ng-click="answer.voteDown(answer.question, aswr)"></a>
 									<span
-											ng-show="answer.canCheckAnswer()"
+											ng-show="answer.canCheckAnswer() && !aswr.checked"
 											class="vote-accepted-off"
 											ng-click="answer.setChecked(answer.question, aswr)">
 						</span>
@@ -146,7 +146,7 @@
 											<span class="comment-copy"> <!-- ng-bind-html="aswr.question.text" -->
 												{{comment.text}}
 											</span>
-													- {{comment.author.name}} at {{comment.created_date | date:"dd/MM/yyyy h:mma"}}
+													- {{comment.author.fullName}} at {{comment.created_date | date:"dd/MM/yyyy h:mma"}}
 												</div>
 											</td>
 										</tr>
