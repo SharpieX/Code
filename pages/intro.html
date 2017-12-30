@@ -46,12 +46,12 @@
                     <div class="collapse navbar-collapse" id="menu">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="active"><a href="#intro" ng-click="goTo($event)">Home</a></li>
-                            <li><a href="#about" ng-click="goTo($event)">About Us</a></li>
                             <li><a href="#service" ng-click="goTo($event)">Services</a></li>
+                            <li><a href="#about" ng-click="goTo($event)">About Us</a></li>
+                            <li><a href="#contact" ng-click="goTo($event)" >Contact</a></li>
                             <li ng-if="isAuthenticated()"><a ui-sref="profile">Profile</a></li>
                             <li ng-if="!isAuthenticated()"><a ui-sref="login">Login</a></li>
                             <li ng-if="isAuthenticated()"><a ui-sref="logout">Logout</a></li>
-                            <li><a href="#contact" ng-click="goTo($event)" >Contact</a></li>
                         </ul>
                     </div>
                     <!-- /.Navbar-collapse -->
@@ -62,6 +62,81 @@
     </nav>
 </div>
 <!-- /Navigation -->
+<!-- Section: services -->
+<section id="service" class="home-section color-dark bg-gray">
+    <div class="container marginbot-50">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div>
+                    <div class="section-heading text-center">
+                        <h2 class="h-bold">What we can do for you</h2>
+                        <div class="divider-header"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-center">
+        <div class="container">
+
+            <div class="row animatedParent">
+                <div class="col-md-4">
+                    <div class="animated rotateInDownLeft slow">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <span class="fa fa-laptop fa-2x"></span>
+                            </div>
+                            <div class="service-desc">
+                                <h5>Live Class</h5>
+                                <div class="divider-header"></div>
+                                <p>
+                                    Get best tuition online with one to one live online tutoring. Online education with tutor for homework help, exam help, prepare for IIT JEE, CBSE, ICSE, NTSE, PSA & IMO.
+                                </p>
+                                <a href="#contact" ng-click="goTo($event)" class="btn btn-skin">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="animated rotateInDownLeft slower">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <span class="fa fa-question fa-2x"></span>
+                            </div>
+                            <div class="service-desc">
+                                <h5>Ask A question</h5>
+                                <div class="divider-header"></div>
+                                <p>
+                                    Ask A Question is a unique platform through which students can ask questions and we answer them. Students can ask questions either through our forum or live sessions.
+                                </p>
+                                <a ui-sref="home"  class="btn btn-skin">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="animated rotateInDownLeft">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <span class="fa fa-book fa-2x"></span>
+                            </div>
+                            <div class="service-desc">
+                                <h5>Learning Material</h5>
+                                <div class="divider-header"></div>
+                                <p>
+                                    We provides the best comprehensive study material and preparation book with thousands of solved examples,
+                                </p>
+                                <a href="#contact" ng-click="goTo($event)" class="btn btn-skin">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Section: about -->
 <section id="about" class="home-section color-dark bg-white">
@@ -70,7 +145,7 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <div class="animatedParent">
                     <div class="section-heading text-center animated bounceInDown">
-                        <h2 class="h-bold">About the team</h2>
+                        <h2 class="h-bold">About Us</h2>
                         <div class="divider-header"></div>
                     </div>
                 </div>
@@ -103,16 +178,17 @@
 </section>
 <!-- /Section: about -->
 
-
-<!-- Section: services -->
-<section id="service" class="home-section color-dark bg-gray">
+<!-- Section: works -->
+<section id="works" class="home-section color-dark text-center bg-white">
     <div class="container marginbot-50">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <div>
-                    <div class="section-heading text-center">
-                        <h2 class="h-bold">What we can do for you</h2>
-                        <div class="divider-header"></div>
+                    <div class="animatedParent">
+                        <div class="section-heading text-center">
+                            <h2 class="h-bold animated bounceInDown">Meet Our Experts</h2>
+                            <div class="divider-header"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,57 +196,71 @@
 
     </div>
 
-    <div class="text-center">
-        <div class="container">
+    <div class="container">
 
-            <div class="row animatedParent">
-                <div class="col-md-4">
-                    <div class="animated rotateInDownLeft">
-                        <div class="service-box">
-                            <div class="service-icon">
-                                <span class="fa fa-book fa-2x"></span>
-                            </div>
-                            <div class="service-desc">
-                                <h5>Learning Material</h5>
-                                <div class="divider-header"></div>
-                                <p>
-                                    We provides the best comprehensive study material and preparation book with thousands of solved examples,
-                                </p>
-                                <a href="#contact" ng-click="goTo($event)" class="btn btn-skin">Learn more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="animated rotateInDownLeft slower">
-                        <div class="service-box">
-                            <div class="service-icon">
-                                <span class="fa fa-question fa-2x"></span>
-                            </div>
-                            <div class="service-desc">
-                                <h5>Ask A question</h5>
-                                <div class="divider-header"></div>
-                                <p>
-                                    Ask A Question is a unique platform through which students can ask questions and we answer them. Students can ask questions either through our forum or live sessions.
-                                </p>
-                                <a ui-sref="home"  class="btn btn-skin">Learn more</a>
+        <div class="row animatedParent">
+            <div class="text-center">
+                <div class="container">
+
+                    <div class="row animatedParent">
+                        <div class="col-md-3">
+                            <div class="animated fadeInUp slow">
+                                <div class="service-box">
+                                    <div class="avatar">
+                                        <img src="img/avatar1.png" class="img-responsive" alt="img">
+                                    </div>
+                                    <div class="service-desc">
+                                        <h5>Mathematico</h5>
+                                        <p>
+                                            is our super giant who feeds on mathematics. He believes life is meaningless without mathematics. He is cool, fun loving and a bit short tempered. Ask anything from maths he will never fail you
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="animated rotateInDownLeft slow">
-                        <div class="service-box">
-                            <div class="service-icon">
-                                <span class="fa fa-laptop fa-2x"></span>
+                        <div class="col-md-3">
+                            <div class="animated fadeInUp slow">
+                                <div class="service-box">
+                                    <div class="avatar">
+                                        <img src="img/avatar3.png" class="img-responsive" alt="img">
+                                    </div>
+                                    <div class="service-desc">
+                                        <h5>Phycot</h5>
+                                        <p>
+                                            is a born physicist and have a tendency to relate everything to Physics. He is a nerd and introvert. If you want to start a conversation with him, your sentence must contain word Physics in it.
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="service-desc">
-                                <h5>Live Class</h5>
-                                <div class="divider-header"></div>
-                                <p>
-                                    Get best tuition online with one to one live online tutoring. Online education with tutor for homework help, exam help, prepare for IIT JEE, CBSE, ICSE, NTSE, PSA & IMO.
-                                </p>
-                                <a href="#contact" ng-click="goTo($event)" class="btn btn-skin">Learn more</a>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="animated fadeInUp slow">
+                                <div class="service-box">
+                                    <div class="avatar">
+                                        <img src="img/avatar2.png" class="img-responsive" alt="img">
+                                    </div>
+                                    <div class="service-desc">
+                                        <h5>Chemilia</h5>
+                                        <p>
+                                            is a charm in our expert group. She is always in equilibrium with the surroundings. Chemistry is her first and last love. She is like the ionic bond who keeps the team together.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="animated fadeInUp slow">
+                                <div class="service-box">
+                                    <div class="avatar">
+                                        <img src="img/avatar5.png" class="img-responsive" alt="img">
+                                    </div>
+                                    <div class="service-desc">
+                                        <h5>Biomy</h5>
+                                        <p>
+                                            is the most humble personality you are ever going to find. If you test her DNA you will find Biology in there. She is a legend in her subject and always ready to help.
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -178,6 +268,7 @@
             </div>
         </div>
     </div>
+
 </section>
 
 <!-- Section: contact -->
