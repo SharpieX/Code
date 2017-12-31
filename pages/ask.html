@@ -11,7 +11,7 @@
                                     class="form-control"
                                     ng-model="askModel.cobj.title"
                                     type="text"
-                                    placeholder="Title of the question, what's your programming question? Be specific."
+                                    placeholder="Title of the question, what's your question? Be specific."
                                     style="width:100%;">
                         </div>
                     </div>
@@ -26,20 +26,20 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h2>Tag {{current}}</h2>
-                            <input
-                                    type="text"
-                                    ng-model="askModel.current"
-                                    placeholder="Tags"
-                                    uib-typeahead="tags.name for tags in askModel.getTags($viewValue)"
-                                    typeahead-on-select="askModel.onSelect($item, $model, $label)"
-                                    typeahead-loading="askModel.loadingLocations"
-                                    typeahead-select-on-exact="true",
-                                    typeahead-wait-ms="300"
-                                    class="form-control">
+
+                            <div class="btn-group tag-dropdown" uib-dropdown is-open="status.isopen" ng-repeat="(key, value) in askModel.tags">
+                                <button id="{{key}}" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                                    {{ askModel.selectedTag[key].name || key }}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                    <li role="menuitem" ng-repeat="option in value track by $index">
+                                        <a href="" ng-click="askModel.onSelect(option)">{{ option.name }}</a>
+                                    </li>
+                                </ul>
+                            </div>
                             <input ng-model="askModel.cobj.tags" type="text" style="display:none">
                             <br>
-                            <span ng-repeat="tag in askModel.selected track by $index" class="post-tag" ng-click="askModel.removeTag($index)">{{tag.name}} <i class="fa fa-times-circle"></i></span>
-                            <i ng-show="askModel.loadingLocations" class="glyphicon glyphicon-refresh"></i>
                         </div>
                     </div>
 

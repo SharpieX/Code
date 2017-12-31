@@ -24,7 +24,8 @@ angular
 			var data = {
 				from: $scope.email,
 				text: $scope.text,
-				subject: $scope.subject
+				subject: $scope.subject,
+				phone:$scope.phone
 
 			};
 

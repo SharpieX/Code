@@ -1,7 +1,7 @@
 angular.module('stack')
 .controller('SignupCtrl', ['$scope', '$location', '$auth', 'toastr', function ($scope, $location, $auth, toastr) {
 	$scope.signup = function () {
-		$auth.signup($scope.user)
+		$auth.signup($scope.userObj)
 		.then(function (response) {
 			$auth.setToken(response);
 			$location.path('/');

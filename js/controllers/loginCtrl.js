@@ -1,7 +1,7 @@
 angular.module('stack')
 .controller('LoginCtrl', ['$scope', '$location', '$auth', 'toastr', '$state', 'userService', '$rootScope', function ($scope, $location, $auth, toastr, $state, userService, $rootScope) {
 	$scope.login = function () {
-		$auth.login($scope.user)
+		$auth.login($scope.userObj)
 		.then(function () {
 			toastr.success('You have successfully signed in!');
 			$state.go('intro');

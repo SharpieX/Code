@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center">
-                <a href="#about" class="learn-more-btn btn-scroll">Get Started</a>
+                <a href="#service" class="learn-more-btn btn-scroll">Get Started</a>
             </div>
         </div>
     </div>
@@ -167,7 +167,7 @@
                         We are a team of education enthusiasts who aim at restructuring the mode of education delivery. An online platform that is affordable as well as accessible to all
                         A dedicated faculty trying to innovate with teaching methods will now be available to our children just a click away. Currently we are focusing in the field of Mathematics, Physics, Chemistry, and Biology with a future vision of delving into all the fields relevant to a child's bright future.
                     </p>
-                    <a href="#service" class="btn btn-skin btn-scroll">What we do</a>
+                    <a href="#contact" class="btn btn-skin btn-scroll">Learn More</a>
                 </div>
             </div>
 
@@ -308,12 +308,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
+                    <div class="row marginbot-20">
+                        <div class="col-md-6 xs-marginbot-20">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" ng-minlength="8" ng-model="subject"/>
+                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" ng-minlength="4" ng-model="subject"/>
                                 <div ng-show="contact.subject.$error.minlength" class="validation">Subject is too short.</div>
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Contact  Number" ng-model="phone"/>
+                                <div class="validation" ng-show="contact.phone.$invalid && !contact.phone.$pristine"> Enter a valid Phone </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <textarea class="form-control" name="message" rows="5" data-rule="required" ng-minlength="20" ng-model="text"></textarea>
                                 <div ng-show="contact.message.$error.minlength" class="validation">Message is too short.</div>

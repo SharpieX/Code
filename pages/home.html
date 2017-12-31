@@ -1,15 +1,15 @@
 <md-content class="md-padding" layout-xs="column" layout="row">
   <div flex-xs="" flex-gt-xs="20" layout="column"> </div>
   <div flex-xs="" flex-gt-xs="60" layout="column" infinite-scroll="home.loadNext(home.page)" infinite-scroll-disabled="home.busy" infinite-scroll-distance="1">
-    <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch="" ng-repeat="q in home.questions">
+    <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch="" ng-repeat="q in home.questions" ng-class="home.style">
       <md-card-title>
         <md-card-title-text>
           <a  class="md-headline" ui-sref="questions({ id:'{{q._id}}' })">{{q.title}}</a>
           <span class="md-subhead">{{q.answers.length}} Answers &nbsp  &nbsp {{q.views}} Views</span>
           <div class="md-subhead"> <span class="question-info"> asked {{q.created_date | date:"mediumDate"}} by  {{q.author.fullName || 'name not shared'}}</span></div>
         </md-card-title-text>
-        <md-card-title-media style="background-color: #ddd ;">
-          <div class="md-media-sm card-media">  </div>
+        <md-card-title-media >
+          <div class="md-media-sm card-media"> <img ng-src="{{q.author.picture}}" class="md-card-image" alt="Washed Out"></div>
         </md-card-title-media>
       </md-card-title>
       <md-chips layout-margin="30px" ng-model="q.tags" readonly="true">
