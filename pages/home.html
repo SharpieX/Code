@@ -9,7 +9,7 @@
           <div class="md-subhead"> <span class="question-info"> asked {{q.created_date | date:"mediumDate"}} by  {{q.author.fullName || 'name not shared'}}</span></div>
         </md-card-title-text>
         <md-card-title-media >
-          <div class="md-media-sm card-media"> <img ng-src="{{q.author.picture}}" class="md-card-image" alt="Washed Out"></div>
+          <div class="md-media-sm card-media"> <img ng-src="{{q.author.picture}}" class="md-card-image" alt="avatar"></div>
         </md-card-title-media>
       </md-card-title>
       <md-chips layout-margin="30px" ng-model="q.tags" readonly="true">

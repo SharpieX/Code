@@ -138,8 +138,8 @@ angular
 		askModel.createQuestion = function () {
 			askModel.busy = true;
 
-			if (askModel.cobj.tags.length !== 3) {
-				askModel.showSimpleToast('Select all tags');
+			if (askModel.cobj.tags.length !== 2) {
+				askModel.showSimpleToast('Select atleast first two tags');
 				askModel.busy = false;
 				return;
 			}
