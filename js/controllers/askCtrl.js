@@ -138,7 +138,7 @@ angular
 		askModel.createQuestion = function () {
 			askModel.busy = true;
 
-			if (askModel.cobj.tags.length !== 2) {
+			if (askModel.cobj.tags.length < 2) {
 				askModel.showSimpleToast('Select atleast first two tags');
 				askModel.busy = false;
 				return;
