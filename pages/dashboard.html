@@ -71,12 +71,14 @@
                 </md-list-item>
                 <md-list-item>
                     <md-icon class="md-default-theme" class="material-icons">&#xE851;</md-icon>
-                    <p><a ui-sref="users">Users</a></p>
+                    <!--<p><a ui-sref="users">Users</a></p>-->
+                    <p>Users</p>
                     <md-icon class="md-secondary">2</md-icon>
                 </md-list-item>
                 <md-list-item>
                     <md-icon class="md-default-theme" class="material-icons">&#xE8F0;</md-icon>
-                    <p><a ui-sref="tags">Tags</a></p>
+                    <!--<p><a ui-sref="tags">Tags</a></p> -->
+                    <p>Tags</p>
                     <md-icon class="md-secondary">2</md-icon>
                 </md-list-item>
                 <md-divider></md-divider>
@@ -143,7 +145,7 @@
             <span flex></span>
             <md-button class="md-icon-button" aria-label="User">
                 <md-tooltip>User</md-tooltip>
-                <img src="/img/user.png" style="width:24px;height:24px;"/>
+                <a ui-sref="profile"><img src="/img/user.png" style="width:24px;height:24px;"/></a>
             </md-button>
             <md-button class="md-icon-button" aria-label="Messages">
                 <md-tooltip>Messages</md-tooltip>
@@ -171,7 +173,7 @@
             </md-button>
             <md-button class="md-icon-button" aria-label="User">
                 <md-tooltip>User</md-tooltip>
-                <img src="/img/user.png" style="width:24px;height:24px;"/>
+                <a ui-sref="profile"><img src="/img/user.png" style="width:24px;height:24px;"/></a>
             </md-button>
             <md-button class="md-icon-button" aria-label="Messages">
                 <md-tooltip>Messages</md-tooltip>
