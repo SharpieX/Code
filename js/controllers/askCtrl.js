@@ -14,7 +14,6 @@ angular
 .controller('askCtrl', ['$rootScope', '$http', '$location', 'userService', 'tagsService', 'questionsService', 'Upload', '$mdToast',
 	function ($rootScope, $http, $location, userService, tagsService, questionsService, Upload, $mdToast) {
 		var askModel = this;
-		askModel.chapaters;
 		askModel.cobj = {};
 		askModel.cobj.tags = [];
 		askModel.selectedTag = {};
@@ -111,31 +110,7 @@ angular
 		askModel.tags = [];
 		var tagName2Id = {};
 
-		/* Used from typeahead to retrieve tags that matches the user search */
-		askModel.getTags = function (val) {
-			askModel.tags.length = 0;
-			var query = {
-				where: {name: {"$regex": val}}
-			};
-
-			return tagsService.searchTag(query)
-			.then(function (res) {
-				askModel.tags = res.data.data.map(function (tag) {
-					if (askModel.cobj.tags.indexOf(tag._id) < 0) {
-						return {
-							name: tag.name,
-							_id: tag._id
-						}
-					}
-				})
-
-				return _.without(askModel.tags, undefined);
-			});
-		};
-
 		askModel.onSelect = function ($item) { //jshint ignore:line
-
-			// TODO:remove old tags first from array
 
 			if (askModel.cobj.tags.length === 0) {
 				askModel.cobj.tags.push($item);
