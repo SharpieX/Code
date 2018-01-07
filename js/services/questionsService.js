@@ -3,8 +3,8 @@
 
 angular
     .module('stack.service')
-    .factory('questionsService', ['$q', 'userService', 'tagsService', 'answersService', '$stamplay', '$http',
-        function ($q, userService, tagsService, answersService, $stamplay, $http) {
+    .factory('questionsService', ['$q', 'userService', 'tagsService', 'answersService', '$http',
+        function ($q, userService, tagsService, answersService, $http) {
 
             var questions = [];
             var pagination = {};
@@ -54,7 +54,7 @@ angular
                 updateViews: function (question) {
                     var actualViews = question.views || 0;
                     actualViews++;
-                    return $stamplay.Object("question").patch(question._id, {views: actualViews})
+                    //return $stamplay.Object("question").patch(question._id, {views: actualViews})
                 },
 
                 updateModel: function (question, attrs) {
@@ -99,14 +99,14 @@ angular
                     //cache populate data
                     var question = qModel;
 
-                    $stamplay.Object("question").downVote(qModel._id)
+                   /* $stamplay.Object("question").downVote(qModel._id)
                         .then(function (res) {
                             question.actions = res.actions;
                             def.resolve(_getTotalVotes(question));
                         })
                         .catch(function (err) {
                             def.reject(err);
-                        })
+                        })*/
 
                     return def.promise;
                 },
@@ -129,7 +129,13 @@ angular
                 submitAnswer: function (question, nAnswer) {
                     var newAnswers = question.answers
                     newAnswers.push(nAnswer.data.answer);
-                    question.answers = newAnswers;
+
+	                question.answers = _(newAnswers).chain().sortBy(function(answer) {
+		                return answer.author.role;
+	                }).sortBy(function(answer) {
+		                return !answer.checked;
+	                }).value();
+
                     return this.updateModel(question, ['answers']);
                 }
 

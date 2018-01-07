@@ -11,8 +11,8 @@
  */
 angular
 .module('stack')
-.controller('answerCtrl', ['$scope' ,'$rootScope', 'question', 'userService', 'questionsService', 'answersService', 'commentsService',
-    function ($scope,$rootScope, question, userService, questionsService, answersService, commentsService) {
+.controller('answerCtrl', ['$scope' ,'$rootScope', 'question', 'userService', 'questionsService', 'answersService', 'commentsService','CONSTANTS',
+    function ($scope,$rootScope, question, userService, questionsService, answersService, commentsService, CONSTANTS) {
 
         var answerModel = this;
         if (userService.isLogged()) {
@@ -24,7 +24,16 @@ angular
 		    answerModel.user = response;
 	    });
 
+        // Show admin answer always first
+
+	    var sortedAnswer = _(question.answers).chain().sortBy(function(answer) {
+		    return answer.author.role;
+	    }).sortBy(function(answer) {
+		    return !answer.checked;
+	    }).value();
+
         answerModel.question = question;
+	    answerModel.question.answers = sortedAnswer;
         answerModel.question.showCommentArea = false;
 
         /*answerModel.qTotalVote = question.actions.votes.users_upvote.length - question.actions.votes.users_downvote.length;
@@ -58,7 +67,7 @@ angular
 
         /* Returns true if the logged user is the author of the question */
         answerModel.canCheckAnswer = function () {
-	        if (answerModel.user && answerModel.user.role === 'admin') {
+	        if (answerModel.user && answerModel.user.role === CONSTANTS.USER_PERMS.ADMIN.key) {
 		        return true;
 	        }
 

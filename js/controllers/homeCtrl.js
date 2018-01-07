@@ -44,11 +44,10 @@ angular
 
 					homeModel.loadQuestions(params);
 
-				
 			};
 
 			/* Listener on tab */
-			homeModel.sortQuestion = function (sortOn) {
+			/*homeModel.sortQuestion = function (sortOn) {
 				homeModel.busy = true;
 				homeModel.page = 1;
 				homeModel.totalLength = 0;
@@ -75,6 +74,6 @@ angular
 					populate_owner: true,
 					populate: true
 				});
-			};
+			};*/
 		}
 	]);
