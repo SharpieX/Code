@@ -21,21 +21,34 @@ angular
 		askModel.cobj.answers = [];
 		askModel.cobj.views = 0;
 		askModel.questionSubmitted = false;
+		askModel.categories = [{name:'class',options: []},{name:'subject',options: []},{name:'topic',options: []}]
 
 		userService.getUserModel().then(function (response) {
 			askModel.cobj.author = response._id;
 		});
 
-		tagsService.getTags().then(function (response) {
-			var tags = _.sortBy(response.data.data,'level');
-			var groupedTgs = _.groupBy(tags, function (tag) {
-				return tag.type;
+		/**
+		 * populate
+		 * @param params
+		 */
+		function populateTags(params){
+			tagsService.searchTag(params).then(function (response) {
+				var tags = response.data.data;
+				var groupedTgs = _.groupBy(tags, function (tag) {
+					return tag.type;
+				});
+				for (var property in groupedTgs) {
+					if (groupedTgs.hasOwnProperty(property)) {
+						var match = _.find(askModel.categories, function (item) {
+							return item.name === property
+						});
+						match.options = groupedTgs[property];
+					}
+				}
 			});
-			askModel.chapters =  _.groupBy(groupedTgs['chapter'],'category');
-			groupedTgs['chapter'] = [];
-			askModel.tags = groupedTgs
-			console.log(askModel.tags);
-		})
+		}
+
+		populateTags({'type': 'class'});
 
 		var last = {
 			bottom: true,
@@ -121,23 +134,75 @@ angular
 		};
 
 		askModel.onSelect = function ($item) { //jshint ignore:line
-			askModel.cobj.tags.push($item._id);
-			if($item.type === 'category'){
-				askModel.tags['chapter'] =  askModel.chapters[$item.id];
+
+			// TODO:remove old tags first from array
+
+			if (askModel.cobj.tags.length === 0) {
+				askModel.cobj.tags.push($item);
+			} else {
+				var indexByType = _.findIndex(askModel.cobj.tags, function (item) {
+					return item.type === $item.type
+				});
+
+				if (indexByType >= 0) {
+					askModel.cobj.tags[indexByType] = $item;
+				} else {
+					askModel.cobj.tags.push($item);
+				}
 			}
+
+
+			// when change class
+			if($item.type === 'class'){
+				//populate subject
+				var matches = _.filter(askModel.categories, function (item) {
+					return item.name.toLowerCase() !== $item.type ;
+				});
+
+				// clear out all options first
+				_.each(matches, function(match){
+
+					// clear out selected tag
+					delete askModel.selectedTag[match.name];
+					match.options = [];
+				});
+
+				// else populate subjects
+				var value = (6 <= $item.id  && $item.id < 10) ? "6" : "10";
+				var query = {
+					$and: [
+						{type: 'subject'},
+						{$or: [{category: value}, {category: 0}]}
+					]
+				};
+				populateTags(query);
+				askModel.showSimpleToast('Next Choose Subject ');
+			}
+
+			// check if this class holds this subject exist for
+
+			if($item.type === 'subject'){
+				var matchedClass = _.find(askModel.cobj.tags, function (item) {
+					return item.type === 'class'
+				});
+
+				if(matchedClass){
+					askModel.showSimpleToast('Next Choose Topic ');
+					populateTags({type:'topic','category': parseInt(matchedClass.id), subject:$item.id});
+				} else {
+					askModel.showSimpleToast('Select Class first ');
+				}
+
+			}
+
 			var type = $item.type;
 			askModel.selectedTag[type] = $item;
 		};
 
-		/*askModel.removeTag = function(idx) {
-			askModel.cobj.tags.splice(idx, 1);
-			askModel.selected.splice(idx, 1);
-		}*/
-
 		/* Creates a new question */
 		askModel.createQuestion = function () {
 			askModel.busy = true;
-
+			askModel.cobj.tags = _.pluck(askModel.cobj.tags,'_id');
 			if (askModel.cobj.tags.length < 2) {
 				askModel.showSimpleToast('Select atleast first two tags');
 				askModel.busy = false;
