@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center">
-                <a href="#service" class="learn-more-btn btn-scroll">Get Started</a>
+                <a ui-sref="home" class="learn-more-btn btn-scroll">Ask Your Questions</a>
             </div>
         </div>
     </div>
@@ -297,13 +297,13 @@
                     <div class="row marginbot-20">
                         <div class="col-md-6 xs-marginbot-20">
                             <div class="form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" ng-model="name"/>
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" ng-model="name" required/>
                                 <div class="validation" ng-show="contact.name.$invalid && !contact.name.$pristine"> You name is required </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" ng-model="email"/>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" ng-model="email" required/>
                                 <div class="validation" ng-show="contact.email.$invalid && !contact.email.$pristine"> Enter a valid email </div>
                             </div>
                         </div>
@@ -311,13 +311,13 @@
                     <div class="row marginbot-20">
                         <div class="col-md-6 xs-marginbot-20">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" ng-minlength="4" ng-model="subject"/>
+                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" ng-minlength="4" ng-model="subject" required/>
                                 <div ng-show="contact.subject.$error.minlength" class="validation">Subject is too short.</div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Contact  Number" ng-model="phone"/>
+                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Contact  Number" ng-model="phone" required/>
                                 <div class="validation" ng-show="contact.phone.$invalid && !contact.phone.$pristine"> Enter a valid Phone </div>
                             </div>
                         </div>
@@ -325,10 +325,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <textarea class="form-control" name="message" rows="5" data-rule="required" ng-minlength="20" ng-model="text"></textarea>
+                                <textarea class="form-control" name="message" rows="5" data-rule="required" ng-minlength="20" ng-model="text" required> </textarea>
                                 <div ng-show="contact.message.$error.minlength" class="validation">Message is too short.</div>
                             </div>
-                            <button type="submit" class="btn btn-skin btn-lg btn-block" id="btnContactUs">
+                            <button type="submit" class="btn btn-skin btn-lg btn-block" id="btnContactUs" ng-disabled="contact.$invalid">
                                 Send Message</button>
                         </div>
                     </div>

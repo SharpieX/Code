@@ -7,12 +7,15 @@
     and (max-width: 736px) {
         .mobile {
             display:block;
+            position:fixed;
         }
         .desktop {
             display:none;
+            position:fixed;
         }
         .tablet {
             display:none;
+            position:fixed;
         }
     }
 
@@ -21,12 +24,15 @@
     and (max-width: 1200px){
         .tablet {
             display:block;
+            position:fixed;
         }
         .desktop {
             display:none;
+            position:fixed;
         }
         .mobile {
             display:none;
+            position:fixed;
         }
     }
 
@@ -34,15 +40,17 @@
     and (min-width: 1200px) {
         .desktop {
             display:block;
+            position:fixed;
         }
         .tablet {
             display:none;
+            position:fixed;
         }
         .mobile {
             display:none;
+            position:fixed;
         }
     }
-
 
 </style>
 <div  ng-controller="sideNav" class="header" >
@@ -196,5 +204,4 @@
         </div>
     </md-toolbar>
 </div>
-
 <div ui-view></div>

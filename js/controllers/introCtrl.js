@@ -25,7 +25,8 @@ angular
 				from: $scope.email,
 				text: $scope.text,
 				subject: $scope.subject,
-				phone:$scope.phone
+				phone:$scope.phone,
+				name:$scope.name
 
 			};
 

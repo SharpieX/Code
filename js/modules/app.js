@@ -1,7 +1,20 @@
 /*global angular*/
 'use strict';
 
-angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.router', 'ui.bootstrap', 'textAngular', 'ngStamplay', 'ngFileUpload', 'satellizer', 'toastr', 'ngMaterial','ngMessages']);
+/*angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.router',
+	'ui.bootstrap', 'textAngular', 'ngStamplay', 'ngFileUpload',
+	'satellizer', 'toastr', 'ngMaterial', 'ngMessages',
+	"com.2fdevs.videogular",
+	"com.2fdevs.videogular.plugins.controls",
+	"com.2fdevs.videogular.plugins.overlayplay",
+	"com.2fdevs.videogular.plugins.buffering",
+	"info.vietnamcode.nampnq.videogular.plugins.youtube",
+	"com.2fdevs.videogular.plugins.poster"
+]);*/
+angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.router',
+	'ui.bootstrap', 'textAngular', 'ngStamplay', 'ngFileUpload',
+	'satellizer', 'toastr', 'ngMaterial', 'ngMessages'
+]);
 
 angular
 .module('stack')
@@ -113,7 +126,10 @@ angular
 		templateUrl: '/pages/home.html',
 		controller: 'homeCtrl',
 		parent: "app",
-		controllerAs: 'home'
+		controllerAs: 'home',
+		resolve: {
+			loginRequired: loginRequired
+		}
 	})
 	.state('ask', {
 		url: '/questions/ask',
@@ -178,6 +194,12 @@ angular
 		resolve: {
 			skipIfLoggedIn: skipIfLoggedIn
 		}
+	})
+	.state('content', {
+		url: '/content',
+		templateUrl: '/pages/video.html',
+		controller: 'YoutubeCtrl',
+		controllerAs:'controller'
 	})
 	.state('logout', {
 		url: '/logout',

@@ -1,7 +1,7 @@
 angular
 	.module('stack')
-	.controller('answerEditCtrl', ['$scope', 'userService', 'answersService', 'questionsService', '$http',
-		function ($scope, userService, answersService, questionsService, $http) {
+	.controller('answerEditCtrl', ['$scope', 'userService', 'answersService', 'questionsService', '$http','notificationService',
+		function ($scope, userService, answersService, questionsService, $http ,notificationService) {
 			var answModel = this;
 
 			if (userService.isLogged()) {
@@ -30,6 +30,9 @@ angular
                             .then(function () {
                                 answModel.successInCreation = true;
                                 answModel.newAnswer.text = '';
+	                            notificationService.notify(questionModel.author.email, 'Question Answered').then(function(){
+	                            	console.log("Question Answered");
+	                            })
                             })
 							.catch(function (err) {
 								console.log(err)

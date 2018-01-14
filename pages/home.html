@@ -1,4 +1,4 @@
-<md-content class="md-padding" layout-xs="column" layout="row">
+<md-content class="md-padding" layout-xs="column" layout="row" style="padding-top:60px">
   <div flex-xs="" flex-gt-xs="20" layout="column"> </div>
   <div flex-xs="" flex-gt-xs="60" layout="column" infinite-scroll="home.loadNext(home.page)" infinite-scroll-disabled="home.busy" infinite-scroll-distance="1">
     <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch="" ng-repeat="q in home.questions" ng-class="home.style">
@@ -19,7 +19,8 @@
   </div>
 </md-content>
 
+<!--
 <div layout="row" layout-sm="column" layout-align="space-around">
   <md-progress-circular md-mode="indeterminate" md-diameter="20px"></md-progress-circular>
 </div>
-<span flex></span>
+<span flex></span>-->

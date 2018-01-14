@@ -4,7 +4,7 @@ angular.module('stack')
 		$auth.login($scope.userObj)
 		.then(function () {
 			toastr.success('You have successfully signed in!');
-			$state.go('intro');
+			$state.go('home');
 			userService.getUserModel()
 			.then(function (userResp) {
 				$rootScope.user = userResp;
