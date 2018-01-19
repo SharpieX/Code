@@ -52,7 +52,9 @@ module.exports = {
 			"js/controllers/loginCtrl.js",
 			"js/controllers/logoutCtrl.js",
 			"js/controllers/signupCtrl.js",
-			"js/controllers/profileCtrl.js"
+			"js/controllers/profileCtrl.js",
+			"js/controllers/resetCtrl.js",
+			"js/controllers/forgotCtrl.js"
 		],
 		dest: './dist/controllers.js'
 	},

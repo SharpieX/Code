@@ -7,6 +7,7 @@
           <a  class="md-headline" ui-sref="questions({ id:'{{q._id}}' })">{{q.title}}</a>
           <span class="md-subhead">{{q.answers.length}} Answers &nbsp  &nbsp {{q.views}} Views</span>
           <div class="md-subhead"> <span class="question-info"> asked {{q.created_date | date:"mediumDate"}} by  {{q.author.fullName || 'name not shared'}}</span></div>
+          <div class="rubber_stamp" ng-if="home.expertAnswered(q)">Answered</div>
         </md-card-title-text>
         <md-card-title-media >
           <div class="md-media-sm card-media"> <img ng-src="{{q.author.picture}}" class="md-card-image" alt="avatar"></div>

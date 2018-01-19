@@ -126,17 +126,17 @@ angular
 		templateUrl: '/pages/home.html',
 		controller: 'homeCtrl',
 		parent: "app",
-		controllerAs: 'home',
-		resolve: {
-			loginRequired: loginRequired
-		}
+		controllerAs: 'home'
 	})
 	.state('ask', {
 		url: '/questions/ask',
 		templateUrl: '/pages/ask.html',
 		controller: 'askCtrl',
 		parent: "app",
-		controllerAs: 'askModel'
+		controllerAs: 'askModel',
+		resolve: {
+			loginRequired: loginRequired
+		}
 	})
 	.state('questions', {
 		url: '/questions/:id',
@@ -195,6 +195,18 @@ angular
 			skipIfLoggedIn: skipIfLoggedIn
 		}
 	})
+	.state('forgot', {
+		url: '/forgot',
+		templateUrl: '/pages/forgot.html',
+		controller: 'ForgotCtrl',
+		resolve: { skipIfLoggedIn: skipIfLoggedIn }
+	})
+	.state('reset', {
+		url: '/reset/:token',
+		templateUrl: '/pages/reset.html',
+		controller: 'ResetCtrl',
+		resolve: { skipIfLoggedIn: skipIfLoggedIn }
+	})
 	.state('content', {
 		url: '/content',
 		templateUrl: '/pages/video.html',
@@ -208,7 +220,8 @@ angular
 		controllerAs: 'logout'
 	});
 	// use the HTML5 History API
-	//$locationProvider.html5Mode(true);
+	//$locationProvider.html5Mode({ enabled: true, requireBase: true, rewriteLinks: false });
+
 })
 .controller('UploadImageModalInstance', function ($scope, $uibModalInstance, Upload) {
 	$scope.progress = 0;

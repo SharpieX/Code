@@ -18,6 +18,15 @@ angular
 			homeModel.page = 1;
 			homeModel.per_page = 10;
 			homeModel.sort = '-dt_create';
+			homeModel.style = 'stamp';
+
+			homeModel.expertAnswered = function(question){
+				var verifiedAnswer = _.filter(question.answers, function(answer){
+					return answer.checked;
+				});
+
+				return  verifiedAnswer && verifiedAnswer.length > 0
+			}
 
 			/* Loads the questions given a sort parameter */
 			homeModel.loadQuestions = function (params) {

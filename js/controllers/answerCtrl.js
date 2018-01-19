@@ -43,7 +43,7 @@ angular
 
         /* Redirects to login */
         answerModel.toLogin = function () {
-            angular.element('#myModal').modal('show');
+            //angular.element('#myModal').modal('show');
         };
 
 

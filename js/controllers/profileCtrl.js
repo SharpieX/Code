@@ -18,6 +18,20 @@ angular.module('stack')
 			toastr.error(response.data.message, response.status);
 		});
 	};
+	$scope.changePassword = function() {
+		Account.changePassword($scope.user)
+		.then(function(response) {
+			$scope.messages = {
+				success: [response.data]
+			};
+		})
+		.catch(function(response) {
+			$scope.messages = {
+				error: Array.isArray(response.data) ? response.data : [response.data]
+			};
+		});
+	};
+
 	$scope.link = function(provider) {
 		$auth.link(provider)
 		.then(function() {
