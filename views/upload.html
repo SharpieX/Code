@@ -12,8 +12,7 @@
         <uib-progressbar ng-show="progress > 0 " class="progress-striped active" value="progress"></uib-progressbar>
     </div>
     <div class="modal-footer center clearfix">
-        <button ng-click="$dismiss()" type="button" class="btn btn-default pull-left">Cancel</button>
         <button type="submit" ng-disabled="image == null || image == '' || image == 'img/posts/default.svg'" class="btn btn-primary pull-right">Insert Image</button>
-        <input type="file" ngf-select="upload($file)" ng-model="files" ngf-multiple="false" class="btn btn-primary pull-right">
+        <button type="button" ngf-select="upload($file)" ng-model="files" ngf-multiple="false" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-picture mR5"></span>Upload Image</button>
     </div>
 </form>
