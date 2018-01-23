@@ -14,6 +14,6 @@
     <div class="modal-footer center clearfix">
         <button ng-click="$dismiss()" type="button" class="btn btn-default pull-left">Cancel</button>
         <button type="submit" ng-disabled="image == null || image == '' || image == 'img/posts/default.svg'" class="btn btn-primary pull-right">Insert Image</button>
-        <button type="button" ngf-select="upload($file)" ng-model="files" ngf-multiple="false" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-picture mR5"></span>Upload Image</button>
+        <input type="file" ngf-select="upload($file)" ng-model="files" ngf-multiple="false" class="btn btn-primary pull-right">
     </div>
 </form>
