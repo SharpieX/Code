@@ -13,6 +13,6 @@
     </div>
     <div class="modal-footer center clearfix">
         <button type="submit" ng-disabled="image == null || image == '' || image == 'img/posts/default.svg'" class="btn btn-primary pull-right">Insert Image</button>
-        <button type="button" ngf-select="upload($file)" ng-model="files" ngf-multiple="false" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-picture mR5"></span>Upload Image</button>
+        <button type="button" ngf-select="upload($file)"   ngf-accept="'image/*'" ngf-max-size="20MB"  ng-model="files" ngf-multiple="false" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-picture mR5"></span>Upload Image</button>
     </div>
 </form>
