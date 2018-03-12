@@ -1,9 +1,9 @@
 angular
 .module('stack')
-.controller('introCtrl', ['questionsService', '$scope', '$auth','$http',
-	function (questionsService, $scope, $auth, $http) {
+.controller('introCtrl', ['questionsService', '$scope', '$auth','$http', '$mdDialog',
+	function (questionsService, $scope, $auth, $http, $mdDialog) {
 		angular.element('#navigation').sticky({topSpacing: 0});
-
+		$scope.hideNotification = true;
 		$scope.goTo = function ($event) {
 			var $anchor = $($event.currentTarget);
 			var nav = $($anchor.attr('href'));
@@ -52,4 +52,20 @@ angular
 			}, 1500, 'easeInOutExpo');
 			event.preventDefault();
 		});
+
+		$scope.showPrerenderedDialog = function(ev) {
+			debugger;
+			$mdDialog.show({
+				contentElement: '#myDialog',
+				parent: angular.element(document.body),
+				clickOutsideToClose: true
+			})
+			.then(function(answer) {
+				console.log("Singh");
+			}, function() {
+				$scope.hideNotification = false;
+			});
+		};
+
+		$scope.showPrerenderedDialog();
 	}]);

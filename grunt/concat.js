@@ -54,7 +54,10 @@ module.exports = {
 			"js/controllers/signupCtrl.js",
 			"js/controllers/profileCtrl.js",
 			"js/controllers/resetCtrl.js",
-			"js/controllers/forgotCtrl.js"
+			"js/controllers/forgotCtrl.js",
+			"js/controllers/registration.js",
+			"js/controllers/adminCtrl.js",
+			"js/controllers/assignments.js"
 		],
 		dest: './dist/controllers.js'
 	},

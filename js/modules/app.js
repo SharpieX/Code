@@ -128,6 +128,13 @@ angular
 		parent: "app",
 		controllerAs: 'home'
 	})
+	.state('assignments', {
+		url: '/assignments',
+		templateUrl: '/pages/assignment.html',
+		controller: 'assignmentCtrl',
+		parent: "app",
+		controllerAs: 'assignment'
+	})
 	.state('ask', {
 		url: '/questions/ask',
 		templateUrl: '/pages/ask.html',
@@ -212,6 +219,18 @@ angular
 		templateUrl: '/pages/video.html',
 		controller: 'YoutubeCtrl',
 		controllerAs:'controller'
+	})
+	.state('register', {
+		url: '/register',
+		templateUrl: '/pages/registration.html',
+		controller: 'registrationCtrl',
+		controllerAs:'registration'
+	})
+	.state('admin', {
+		url: '/admin',
+		templateUrl: '/pages/admin.html',
+		controller: 'adminCtrl',
+		controllerAs:'admin'
 	})
 	.state('logout', {
 		url: '/logout',

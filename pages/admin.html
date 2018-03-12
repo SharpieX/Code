@@ -1,0 +1,54 @@
+<div class="container" style="padding-top: 10%; margin-bottom:3%">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="row">
+                <div class="col-md-9">
+
+                    <form name="myForm">
+                        <fieldset>
+                            <legend>Upload on form submit</legend>
+                            <input type="file" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*,application/pdf'"  ngf-max-size="2MB" required>
+                                <i ng-show="myForm.file.$error.required">*required</i><br>
+                                <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                            <div ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb">
+
+                            </div>
+                                <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+                            <br>
+                            <button ng-disabled="!myForm.$valid"  ng-click="uploadFile(picFile)">Submit </button>
+                            <span class="progress" ng-show="picFile.progress >= 0">
+
+                                    <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
+                            </span>
+
+                            <span ng-show="picFile.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                        </fieldset>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>Tag {{current}}</h2>
+
+                                <div class="btn-group tag-dropdown" uib-dropdown is-open="status.isopen"  ng-repeat=" category in categories">
+                                    <button id="{{key}}" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                                        {{ (selectedTag[category.name].name || category.name) | limitTo: 20}}
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" uib-dropdown-menu role="menu"
+                                        aria-labelledby="single-button">
+                                        <li role="menuitem" ng-repeat="option in category.options track by $index">
+                                            <a href="" ng-click="onSelect(option)">{{ option.name }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+q
