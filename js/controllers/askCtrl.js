@@ -143,7 +143,7 @@ angular
 				});
 
 				// else populate subjects
-				var value = (6 <= $item.id  && $item.id < 10) ? "6" : "10";
+				var value = (6 <= $item.id  && $item.id <= 10) ? "6" : "10";
 				var query = {
 					$and: [
 						{type: 'subject'},
