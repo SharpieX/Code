@@ -34,7 +34,12 @@
     "satellizer": "^0.15.5",
     "angular-toastr": "^2.1.1",
     "angular-material": "^1.1.5",
-    "angular-messages": "^1.6.8"
+    "angular-messages": "^1.6.8",
+    "videogular-controls": "^1.4.4",
+    "videogular-buffering": "^1.4.4",
+    "videogular-poster": "^1.4.4",
+    "videogular-overlay-play": "^1.4.4",
+    "videogular-themes-default": "^1.4.4"
   },
   "devDependencies": {}
 }

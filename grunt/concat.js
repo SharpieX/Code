@@ -23,6 +23,7 @@ module.exports = {
 			'css/intro/animations.css',
 			'css/intro/style.css',
 			'css/login/style.css',
+			'css/table.css',
 			'bower_components/textAngular/src/textAngular.css'
 		],
 		dest: './dist/stylesheets.min.css',
@@ -56,7 +57,7 @@ module.exports = {
 			"js/controllers/resetCtrl.js",
 			"js/controllers/forgotCtrl.js",
 			"js/controllers/registration.js",
-			"js/controllers/adminCtrl.js",
+			"js/controllers/admin/adminCtrl.js",
 			"js/controllers/assignments.js"
 		],
 		dest: './dist/controllers.js'

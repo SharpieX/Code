@@ -108,6 +108,8 @@ angular
 
 	$urlRouterProvider.otherwise('/');
 	$urlRouterProvider.when('/dashboard', '/dashboard/home');
+	$urlRouterProvider.when('/admin', '/adminDashboard/adminAssignments');
+
 
 	$stateProvider
 	.state('intro', {
@@ -120,6 +122,17 @@ angular
 		url: '/dashboard',
 		abstract: true,
 		templateUrl: '/pages/dashboard.html',
+	})
+	.state('admin', {
+		url: '/adminDashboard',
+		abstract: true,
+		templateUrl: '/pages/admin/admin.html',
+	})
+	.state('adminAssignments', {
+		url: '/adminAssignments',
+		templateUrl: '/pages/admin/adminAssignment.html',
+		controller: 'adminAssignmentCtrl',
+		parent: "admin",
 	})
 	.state('home', {
 		url: '/home',
@@ -225,12 +238,6 @@ angular
 		templateUrl: '/pages/registration.html',
 		controller: 'registrationCtrl',
 		controllerAs:'registration'
-	})
-	.state('admin', {
-		url: '/admin',
-		templateUrl: '/pages/admin.html',
-		controller: 'adminCtrl',
-		controllerAs:'admin'
 	})
 	.state('logout', {
 		url: '/logout',

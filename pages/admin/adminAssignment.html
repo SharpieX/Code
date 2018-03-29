@@ -1,0 +1,119 @@
+<link></
+<div ng-cloak style="padding-top:60px">
+    <md-content class="md-padding" layout-xs="column" layout="row">
+        <div flex-xs flex-gt-xs="50" layout="column">
+            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Upload Homework</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content layout="row" layout-align="space-between">
+                    <form name="uploadForm" style="width: 100%;" layout="column">
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <input class="ng-hide" id="input-file-id" multiple type="file" />
+                                <button for="input-file-id" class="md-button md-raised md-primary" style="background-color:#3f51b5"
+                                        ngf-select ng-model="picFile" name="file" ngf-accept="'image/*,application/pdf'"  ngf-max-size="2MB" required>Choose Files</button>
+                                <span  class="md-subhead" ng-click="picFile = null" ng-show="picFile">{{picFile.name}}</span>
+                                <span ng-if="picFile"> <i class="material-icons">&#xE872;</i> </span>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start">
+                         <md-input-container flex="50" ng-repeat=" category in categories">
+                                <label> {{ (selectedTag[category.name].name || category.name) | limitTo: 20}}</label>
+                                <md-select name="tags_{{$index}}" ng-model="selectedTag[category.name].name" required>
+                                    <md-option ng-repeat="option in category.options track by $index" >
+                                        <div class="option" ng-click="onSelect(option)"><a href="">{{ option.name }}</a></div>
+                                    </md-option>
+                                </md-select>
+                                <div class="errors" ng-messages="uploadForm['tags_' + $index].$error">
+                                    <div ng-message="required">Required</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="end">
+                            <md-button class="md-raised md-primary" aria-label="Favorite" ng-disabled="!uploadForm.$valid"  ng-click="uploadFile(picFile)">
+                                Submit
+                            </md-button>
+                        </div>
+                    </form>
+                </md-card-content>
+            </md-card>
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Assignments</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content layout="row" layout-align="space-between">
+                    <h2 ng-if="assignments.length == 0">
+                        No Assignments added
+                    </h2>
+                    <div id="demo" ng-if="assignments.length">
+                        <!-- Responsive table starts here -->
+                        <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+                        <div class="table-responsive-vertical shadow-z-1">
+                            <!-- Table starts here -->
+                            <table id="table" class="table table-hover table-mc-light-blue">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Class</th>
+                                    <th>Subject</th>
+                                    <th>Chapter</th>
+                                    <th>Remove</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="assignment in assignments">
+                                    <td data-title="Name">{{assignment.name}}</td>
+                                    <td data-title="Name">{{assignment.tags[0].name}}</td>
+                                    <td data-title="Name">{{assignment.tags[1].name}}</td>
+                                    <td data-title="Name">{{assignment.tags[2].name}}</td>
+                                    <td data-title="Status"><span ng-click="removeAssignments(assignment)"><i class="material-icons">&#xE872;</i></span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div flex-xs flex-gt-xs="50" layout="column">
+            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Card with image</span>
+                        <span class="md-subhead">Small</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-sm card-media"></div>
+                    </md-card-title-media>
+                </md-card-title>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button>Action 1</md-button>
+                    <md-button>Action 2</md-button>
+                </md-card-actions>
+            </md-card>
+            <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Card with image</span>
+                        <span class="md-subhead">Medium</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-md card-media"></div>
+                    </md-card-title-media>
+                </md-card-title>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button>Action 1</md-button>
+                    <md-button>Action 2</md-button>
+                </md-card-actions>
+            </md-card>
+            <div layout layout-padding layout-align="center end" style="height:200px">
+                <md-checkbox ng-model="showDarkTheme">Use 'Dark' Themed Cards</md-checkbox>
+            </div>
+        </div>
+    </md-content>
+</div>

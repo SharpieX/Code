@@ -1,6 +1,6 @@
 angular
 .module('stack')
-.controller('adminCtrl', ['$scope', 'Upload', '$timeout', 'tagsService',  function ($scope, Upload, $timeout, tagsService) {
+.controller('adminAssignmentCtrl', ['$scope', 'Upload', '$timeout', 'tagsService',  '$http', function ($scope, Upload, $timeout, tagsService, $http) {
 
 
 	$scope.categories = [{name:'class',options: []},{name:'subject',options: []},{name:'topic',options: []}];
@@ -25,6 +25,16 @@ angular
 	}
 
 	populateTags({'type': 'class'});
+	$http({
+		method: 'GET',
+		url: '/api/assignments',
+	}).then(function(response){
+		$scope.assignments = response.data.data;
+		_.each($scope.assignments, function(assignment){
+			assignment.link = window.location.origin + "/api/resources/uuid?uuid=" + assignment.uuid;
+		})
+	});
+
 
 
 	$scope.uploadFile = function(file) {
@@ -36,6 +46,17 @@ angular
 		file.upload.then(function (response) {
 			$timeout(function () {
 				file.result = response.data;
+				if (!response.err) {
+					var assignment = response.data.data;
+					assignment.link = window.location.origin + "/api/resources/uuid?uuid=" + assignment.uuid;
+					if (!($scope.assignments && $scope.assignments.length)) {
+						$scope.assignments = [];
+
+					}
+					$scope.assignments.push(assignment);
+
+				}
+
 			});
 		}, function (response) {
 			if (response.status > 0)
@@ -47,6 +68,20 @@ angular
 	}
 
 
+	$scope.removeAssignments = function(assignment){
+		$http({
+			method: 'GET',
+			url: '/api/removeAssignment/id/',
+			params: {id: assignment._id}
+		}).then(function(response){
+			if(!response.err){
+				$scope.assignments = _.reject($scope.assignments, function(item){
+					return item._id === assignment._id;
+				})
+			}
+
+		});
+	}
 
 	$scope.onSelect = function ($item) { //jshint ignore:line
 
@@ -107,6 +142,8 @@ angular
 		var type = $item.type;
 		$scope.selectedTag[type] = $item;
 	};
+
+
 }]);
 
 
