@@ -68,10 +68,10 @@
                                 <tbody>
                                 <tr ng-repeat="assignment in assignments">
                                     <td data-title="Name">{{assignment.name}}</td>
-                                    <td data-title="Name">{{assignment.tags[0].name}}</td>
-                                    <td data-title="Name">{{assignment.tags[1].name}}</td>
-                                    <td data-title="Name">{{assignment.tags[2].name}}</td>
-                                    <td data-title="Status"><span ng-click="removeAssignments(assignment)"><i class="material-icons">&#xE872;</i></span></td>
+                                    <td data-title="Class">{{assignment.tags[0].name}}</td>
+                                    <td data-title="Subject">{{assignment.tags[1].name}}</td>
+                                    <td data-title="Chapter">{{assignment.tags[2].name}}</td>
+                                    <td data-title="Remove"><span ng-click="removeAssignments(assignment)"><i class="material-icons">&#xE872;</i></span></td>
                                 </tr>
                                 </tbody>
                             </table>
