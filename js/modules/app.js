@@ -11,9 +11,20 @@
 	"info.vietnamcode.nampnq.videogular.plugins.youtube",
 	"com.2fdevs.videogular.plugins.poster"
 ]);*/
-angular.module('stack', ['stack.service', 'infinite-scroll', 'ngRoute', 'ui.router',
-	'ui.bootstrap', 'textAngular', 'ngStamplay', 'ngFileUpload',
-	'satellizer', 'toastr', 'ngMaterial', 'ngMessages'
+
+agGrid.initialiseAgGridWithAngular1(angular);
+
+angular.module('stack', ['stack.service', 'infinite-scroll',
+	'ngRoute', 'ui.router',
+	'ui.bootstrap',
+	'textAngular',
+	'ngStamplay',
+	'ngFileUpload',
+	'satellizer',
+	'toastr',
+	'ngMaterial',
+	'ngMessages',
+	'agGrid'
 ]);
 
 angular

@@ -67,5 +67,5 @@ angular
 			});
 		};
 
-		$scope.showPrerenderedDialog();
+		//$scope.showPrerenderedDialog();
 	}]);
