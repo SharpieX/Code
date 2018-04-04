@@ -33,7 +33,7 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                                    <li role="menuitem" ng-repeat="option in category.options track by $index">
+                                    <li role="menuitem" ng-repeat="option in category.options | orderBy: id track by $index ">
                                         <a href="" ng-click="askModel.onSelect(option)">{{ option.name }}</a>
                                     </li>
                                 </ul>
