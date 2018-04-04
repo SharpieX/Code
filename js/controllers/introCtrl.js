@@ -3,7 +3,7 @@ angular
 .controller('introCtrl', ['questionsService', '$scope', '$auth','$http', '$mdDialog',
 	function (questionsService, $scope, $auth, $http, $mdDialog) {
 		angular.element('#navigation').sticky({topSpacing: 0});
-		$scope.hideNotification = true;
+		$scope.hideNotification = false;
 		$scope.goTo = function ($event) {
 			var $anchor = $($event.currentTarget);
 			var nav = $($anchor.attr('href'));
