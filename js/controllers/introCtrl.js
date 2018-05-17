@@ -54,14 +54,12 @@ angular
 		});
 
 		$scope.showPrerenderedDialog = function(ev) {
-			debugger;
 			$mdDialog.show({
 				contentElement: '#myDialog',
 				parent: angular.element(document.body),
 				clickOutsideToClose: true
 			})
 			.then(function(answer) {
-				console.log("Singh");
 			}, function() {
 				$scope.hideNotification = false;
 			});

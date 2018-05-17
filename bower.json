@@ -40,7 +40,9 @@
     "videogular-poster": "^1.4.4",
     "videogular-overlay-play": "^1.4.4",
     "videogular-themes-default": "^1.4.4",
-    "ag-grid-enterprise": "^17.0.0"
+    "ag-grid-enterprise": "^17.0.0",
+    "lodash": "^4.17.5",
+    "md-data-table": "^2.2.0"
   },
   "devDependencies": {}
 }

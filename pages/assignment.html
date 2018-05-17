@@ -1,35 +1,49 @@
-<link href="../css/table.css" rel="stylesheet">
-<div id="demo">
-    <h1>Assignments</h1>
-    <!-- Responsive table starts here -->
-    <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
-    <div class="table-responsive-vertical shadow-z-1">
-        <!-- Table starts here -->
-        <table id="table" class="table table-hover table-mc-light-blue">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Class</th>
-                <th>Subject</th>
-                <th>Chapter</th>
-                <th>Link</th>
-                <th>Submission Days</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="assignment in assignments">
-                <td data-title="ID">{{$index + 1}}</td>
-                <td data-title="Name">{{assignment.name}}</td>
-                <td data-title="Name">{{assignment.tags[0].name}}</td>
-                <td data-title="Name">{{assignment.tags[1].name}}</td>
-                <td data-title="Name">{{assignment.tags[2].name}}</td>
-                <td data-title="Link">
-                    <a href="{{assignment.link}}" target="_blank">Download</a>
-                </td>
-                <td data-title="Status">7</td>
-            </tr>
-            </tbody>
-        </table>
+<div style="padding-top:70px">
+<md-content class="md-padding" layout-xs="column" layout="row" layout-align="center">
+    <div flex-xs flex-gt-xs="80" layout="column">
+        <mdt-table
+                table-card="{title: 'Assignments'}"
+                paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+                mdt-row-paginator="paginatorCallback(page, pageSize, options)"
+                mdt-row-paginator-error-message="Error happened during loading assignments."
+                mdt-row="{
+            'table-row-id-key': 'fields._id',
+            'column-keys': [
+                'id',
+                'name',
+                'class',
+                'subject',
+                'chapter',
+                'link'
+            ]}">
+
+            <mdt-header-row>
+                <mdt-column align-rule="left">ID</mdt-column>
+
+                <mdt-column align-rule="left">Name</mdt-column>
+
+
+                <mdt-column align-rule="left"
+                            column-filter="{
+                            'valuesProviderCallback': classFilterCallback,
+                            'valuesTransformerCallback': classNameTransformer,
+                            'filterType': 'checkbox'
+                        }">Class</mdt-column>
+                <mdt-column align-rule="left" column-filter="{
+                            'valuesProviderCallback': subjectFilterCallback,
+                            'valuesTransformerCallback': subjectNameTransformer,
+                            'filterType': 'checkbox'
+                        }"
+                >Subject</mdt-column>
+                <mdt-column align-rule="left">Chapter</mdt-column>
+                <mdt-column align-rule="left">Download</mdt-column>
+            </mdt-header-row>
+            <mdt-custom-cell column-key="link">
+                <div class="crop">
+                    <a href="{{value}}" target="_blank">Download</a>
+                </div>
+            </mdt-custom-cell>
+        </mdt-table>
     </div>
+</md-content>
 </div>

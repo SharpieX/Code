@@ -24,6 +24,7 @@ angular.module('stack', ['stack.service', 'infinite-scroll',
 	'toastr',
 	'ngMaterial',
 	'ngMessages',
+	'mdDataTable',
 	'agGrid'
 ]);
 
