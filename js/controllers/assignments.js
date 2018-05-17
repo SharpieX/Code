@@ -16,7 +16,7 @@ angular
 			return item.class && item.class.toLowerCase();
 		});
 
-		arr = _.uniq(arr, function(item){ return item.class;});
+		arr = _.uniqBy(arr, function(item){ return item.class;});
 
 		return $q.resolve(arr);
 	}
@@ -30,7 +30,7 @@ angular
 			return item.subject && item.subject.toLowerCase();
 		});
 
-		arr = _.uniq(arr, function(item){ return item.subject;});
+		arr = _.uniqBy(arr, function(item){ return item.subject;});
 
 		return $q.resolve(arr);
 	}
