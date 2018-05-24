@@ -55,7 +55,7 @@ angular
 
 	populateTags({'type': 'class'});
 	$http({
-		method: 'GET',
+		method: 'POST',
 		url: '/api/assignments',
 	}).then(function (response) {
 		$scope.assignments = response.data.data;

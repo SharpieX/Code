@@ -60,7 +60,9 @@ angular
 		popupOptions: {width: 580, height: 400}
 	});
 
-	$mdThemingProvider.theme('default').primaryColor("blue").accentColor("red");
+	$mdThemingProvider.theme('default')
+	.primaryPalette("blue")
+	.accentPalette("red");
 	/**
 	 * Helper auth functions
 	 */
