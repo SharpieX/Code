@@ -4,9 +4,11 @@ var app      = express();                               // create our app w/ exp
 //var morgan = require('morgan');             // log requests to the console (express4)
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 //var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-const proxy = require('http-proxy-middleware')
+const proxy = require('http-proxy-middleware');
 var apiProxy = proxy('/api', {target: 'http://localhost:3050/'});
-app.use(apiProxy)
+var compresssion = require('compression');
+app.use(apiProxy);
+app.use(compresssion());
 
 // configuration =================
 
